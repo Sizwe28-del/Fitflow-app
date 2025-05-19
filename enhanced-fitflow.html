@@ -1,0 +1,2926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FitFlow Gym - Enhanced Edition</title>
+  <meta name="description" content="Advanced fitness platform with AI-generated tutorials, 100+ exercises, and progress tracking." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Base styles */
+    :root {
+      --primary-color: #0e153a;
+      --secondary-color: #3d5af1;
+      --accent-color: #22d1ee;
+      --light-color: #e2f3f5;
+      --dark-color: #0e153a;
+      --success-color: #4caf50;
+      --warning-color: #ff9800;
+      --danger-color: #f44336;
+      --text-color: #333;
+      --text-light: #666;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: #f9f9f9;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-color);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* Layout */
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--box-shadow);
+    }
+
+    header h1 {
+      color: white;
+      margin-bottom: 0;
+      font-size: 1.5rem;
+    }
+
+    header nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    header nav a {
+      color: white;
+      font-weight: 500;
+    }
+
+    header nav a:hover {
+      color: var(--accent-color);
+    }
+
+    section {
+      padding: 4rem 2rem;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    section > p {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* Components */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .primary {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .primary:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .secondary {
+      background-color: var(--light-color);
+      color: var(--primary-color);
+    }
+
+    .secondary:hover {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background-color: var(--light-color);
+      color: var(--primary-color);
+    }
+
+    .tag.small {
+      padding: 0.2rem 0.5rem;
+      font-size: 0.7rem;
+    }
+
+    .tag.gym {
+      background-color: #ffecb3;
+      color: #e65100;
+    }
+
+    .tag.home {
+      background-color: #e1f5fe;
+      color: #0277bd;
+    }
+
+    .tag.core {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .tag.male {
+      background-color: #bbdefb;
+      color: #1565c0;
+    }
+
+    .tag.female {
+      background-color: #f8bbd0;
+      color: #c2185b;
+    }
+
+    .tag.both {
+      background-color: #e1bee7;
+      color: #7b1fa2;
+    }
+
+    .tag.upper {
+      background-color: #ffccbc;
+      color: #bf360c;
+    }
+
+    .tag.lower {
+      background-color: #c8e6c9;
+      color: #2e7d32;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+
+    .text-link i {
+      transition: transform 0.3s ease;
+    }
+
+    .text-link:hover i {
+      transform: translateX(4px);
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(14, 21, 58, 0.8), rgba(14, 21, 58, 0.9)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080') no-repeat center center/cover;
+      color: white;
+      padding: 6rem 2rem;
+      text-align: center;
+      margin-top: -4rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Category Grid */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .category-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+
+    .category-card h3 {
+      margin: 1rem 1rem 0.5rem;
+    }
+
+    .category-card p {
+      margin: 0 1rem 1rem;
+      color: var(--text-light);
+    }
+
+    .category-card a {
+      margin: 0 1rem 1rem;
+      display: inline-block;
+    }
+
+    /* Filter Buttons and Search */
+    .filter-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+
+    .search-container {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .search-container input {
+      flex-grow: 1;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+
+    .tag-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tag-filter {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .tag-filter:hover, .tag-filter.active {
+      background-color: var(--light-color);
+      border-color: var(--light-color);
+      color: var(--primary-color);
+    }
+
+    /* Exercise Grid */
+    .exercises-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+
+    .exercise-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exercise-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exercise-image img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .exercise-card:hover .exercise-image img {
+      transform: scale(1.05);
+    }
+
+    .exercise-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exercise-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-header h3 {
+      margin-bottom: 0;
+      font-size: 1.2rem;
+    }
+
+    .exercise-content p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .exercise-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .exercise-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .play-btn {
+      color: var(--secondary-color);
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      transition: var(--transition);
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 50%;
+    }
+
+    .play-btn:hover {
+      color: var(--primary-color);
+      background-color: var(--light-color);
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .pagination button {
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+
+    .pagination button:hover, .pagination button.active {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+
+    /* Stats Section */
+    #stats {
+      background-color: var(--primary-color);
+      color: white;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .stat h3 {
+      color: var(--accent-color);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .stat i {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    /* Routine Checker */
+    .routine-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .routine-info i {
+      font-size: 3rem;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    .testimonial {
+      background-color: var(--light-color);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      margin-top: 2rem;
+      position: relative;
+    }
+
+    .testimonial:before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid var(--light-color);
+    }
+
+    .testimonial p {
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial span {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .routine-form {
+      background-color: white;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+    }
+
+    .form-hint {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 0.3rem;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-weight: normal;
+    }
+
+    .form-check {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-check input {
+      margin-top: 0.3rem;
+    }
+
+    #routineResult {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background-color: var(--light-color);
+      border-radius: var(--border-radius);
+    }
+
+    #routineResult h4 {
+      margin-bottom: 1rem;
+    }
+
+    #recommendationsList {
+      padding-left: 1.5rem;
+    }
+
+    #recommendationsList li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      box-shadow: var(--box-shadow);
+      position: relative;
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .stars {
+      color: #ffc107;
+      margin-top: 0.2rem;
+    }
+
+    /* Progress Tracking */
+    .progress-container {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--box-shadow);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .progress-header select {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 400px;
+      margin-bottom: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background-color: var(--light-color);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+    }
+
+    .stat-card h4 {
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .log-workout-form {
+      background-color: var(--light-color);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+    }
+
+    /* Support Center */
+    .support-container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .faq-container {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--box-shadow);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #eee;
+      padding: 1rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .faq-answer {
+      padding-top: 1rem;
+      display: none;
+      color: var(--text-light);
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .chat-container {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--box-shadow);
+      display: flex;
+      flex-direction: column;
+      height: 600px;
+    }
+
+    .chat-messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      background-color: #f9f9f9;
+      border-radius: var(--border-radius);
+    }
+
+    .chat-message {
+      max-width: 80%;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+    }
+
+    .chat-message.user {
+      align-self: flex-end;
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .chat-message.assistant {
+      align-self: flex-start;
+      background-color: var(--light-color);
+      color: var(--text-color);
+    }
+
+    .chat-form {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chat-form input {
+      flex-grow: 1;
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+    }
+
+    /* Signup Section */
+    .signup-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .signup-form {
+      background-color: white;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .signup-benefits {
+      padding: 2rem;
+      background-color: var(--light-color);
+      border-radius: var(--border-radius);
+      position: sticky;
+      top: 6rem;
+    }
+
+    .benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .benefit i {
+      color: var(--secondary-color);
+      font-size: 1.5rem;
+      min-width: 28px;
+    }
+
+    .benefit-content h4 {
+      margin-bottom: 0.3rem;
+    }
+
+    .benefit-content p {
+      color: var(--text-light);
+    }
+
+    /* Video Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      max-width: 800px;
+      width: 90%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .close-modal:hover {
+      color: var(--danger-color);
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .video-container img, .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: cover;
+    }
+
+    .demo-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 1.5rem;
+    }
+
+    .tab {
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      position: relative;
+      font-weight: 500;
+    }
+
+    .tab.active {
+      color: var(--secondary-color);
+    }
+
+    .tab.active:after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--secondary-color);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .routine-container,
+      .signup-container,
+      .support-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .signup-benefits {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      header nav {
+        margin-top: 1rem;
+      }
+
+      .hero {
+        padding: 4rem 1rem;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      section {
+        padding: 3rem 1rem;
+      }
+
+      .radio-group {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .exercise-card {
+        max-width: 100%;
+      }
+    }
+
+    /* Animation */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--secondary-color);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-dumbbell"></i> FitFlow Gym</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#exercises">Exercises</a>
+      <a href="#routine">Routine Checker</a>
+      <a href="#progress">Progress</a>
+      <a href="#support">Support</a>
+      <a href="#signup">Sign Up</a>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div class="hero">
+      <div class="hero-content">
+        <h2>Advanced Fitness Training with AI</h2>
+        <p>100+ exercises, AI-generated tutorials, and personalized tracking for both men and women.</p>
+        <div class="hero-buttons">
+          <a href="#exercises" class="btn primary">Explore Exercises</a>
+          <a href="#signup" class="btn secondary">Join Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="categories">
+    <h2>Specialized Workout Categories</h2>
+    <p>Choose from our comprehensive selection of workouts designed for all body types and fitness goals.</p>
+    
+    <div class="category-grid">
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Strength Training">
+        <h3>Strength Training</h3>
+        <p>Build muscle and increase your strength with our comprehensive programs.</p>
+        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Cardio Training">
+        <h3>Cardio Training</h3>
+        <p>Improve your endurance and heart health with effective cardio workouts.</p>
+        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1616803689943-5601631c7fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Core & Belly Fat">
+        <h3>Core & Belly Fat</h3>
+        <p>Target your core muscles and reduce belly fat with specialized exercises.</p>
+        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Home Workouts">
+        <h3>Home Workouts</h3>
+        <p>No equipment? No problem. Effective workouts you can do from anywhere.</p>
+        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Gym Equipment">
+        <h3>Gym Equipment</h3>
+        <p>Master dumbbells, treadmills, and other gym machines for optimal results.</p>
+        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Lower Body">
+        <h3>Lower Body</h3>
+        <p>Focus on legs, glutes and calves with our targeted lower body routines.</p>
+        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Upper Body">
+        <h3>Upper Body</h3>
+        <p>Develop your arms, chest, shoulders and back with these specialized workouts.</p>
+        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Flexibility">
+        <h3>Flexibility</h3>
+        <p>Improve your range of motion and prevent injuries with these stretching routines.</p>
+        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="exercises">
+    <h2>🏋️ Exercise Library</h2>
+    <p>Over 100 exercises with AI-generated 3D demonstrations for perfect form</p>
+    
+    <div class="filter-container">
+      <div class="search-container">
+        <input type="text" id="exerciseSearch" placeholder="Search exercises...">
+        <button id="searchButton" class="btn primary">Search</button>
+      </div>
+      
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="gym">Gym</button>
+        <button class="filter-btn" data-category="home">Home</button>
+        <button class="filter-btn" data-category="core">Core</button>
+      </div>
+      
+      <div class="tag-filters">
+        <span>Target:</span>
+        <button class="tag-filter" data-target="upper">Upper Body</button>
+        <button class="tag-filter" data-target="lower">Lower Body</button>
+        <button class="tag-filter" data-target="core">Core</button>
+        <button class="tag-filter" data-target="full">Full Body</button>
+      </div>
+      
+      <div class="tag-filters">
+        <span>Equipment:</span>
+        <button class="tag-filter" data-equipment="none">No Equipment</button>
+        <button class="tag-filter" data-equipment="dumbbell">Dumbbells</button>
+        <button class="tag-filter" data-equipment="barbell">Barbell</button>
+        <button class="tag-filter" data-equipment="machine">Machines</button>
+        <button class="tag-filter" data-equipment="resistance">Resistance</button>
+      </div>
+      
+      <div class="tag-filters">
+        <span>Gender Focus:</span>
+        <button class="tag-filter" data-gender="male">Male</button>
+        <button class="tag-filter" data-gender="female">Female</button>
+        <button class="tag-filter" data-gender="both">Both</button>
+      </div>
+    </div>
+    
+    <div class="exercises-grid" id="exercisesGrid">
+      <!-- Exercise cards will be added dynamically with JavaScript -->
+    </div>
+    
+    <div class="pagination" id="exercisePagination">
+      <!-- Pagination will be generated dynamically -->
+    </div>
+    
+    <div class="text-center">
+      <a href="#" class="btn secondary">View All Exercises <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <section id="stats">
+    <div class="stat">
+      <i class="fas fa-users"></i>
+      <h3>25,000+</h3>
+      <p>Active Members</p>
+    </div>
+    <div class="stat">
+      <i class="fas fa-dumbbell"></i>
+      <h3>100+</h3>
+      <p>Exercise Guides</p>
+    </div>
+    <div class="stat">
+      <i class="fas fa-person-running"></i>
+      <h3>350+</h3>
+      <p>Workout Plans</p>
+    </div>
+    <div class="stat">
+      <i class="fas fa-star"></i>
+      <h3>4.9/5</h3>
+      <p>Average Rating</p>
+    </div>
+  </section>
+
+  <section id="routine">
+    <div class="routine-container">
+      <div class="routine-info">
+        <i class="fas fa-calendar-check"></i>
+        <h2>🗓️ AI Routine Generator</h2>
+        <p>Our advanced AI creates personalized workout routines based on your fitness goals, experience level, and available equipment.</p>
+        <div class="testimonial">
+          <p>"The AI routine generator is amazing! It created a perfect routine that helped me lose 18 pounds in just two months!"</p>
+          <span>- Sarah J.</span>
+        </div>
+      </div>
+      
+      <div class="routine-form">
+        <h3>Generate Your Personalized Routine</h3>
+        <p>Tell us what you're looking for and our AI will create the perfect workout plan.</p>
+        
+        <form id="routineForm">
+          <div class="form-group">
+            <label for="routineGoal">What's your primary fitness goal?</label>
+            <select id="routineGoal" required>
+              <option value="" disabled selected>Select your goal</option>
+              <option value="belly">Lose Belly Fat</option>
+              <option value="muscle">Build Muscle</option>
+              <option value="strength">Increase Strength</option>
+              <option value="cardio">Improve Cardio</option>
+              <option value="toning">Body Toning</option>
+              <option value="endurance">Increase Endurance</option>
+              <option value="flexibility">Improve Flexibility</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Where do you prefer to work out?</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="location" value="gym" required>
+                Gym
+              </label>
+              <label>
+                <input type="radio" name="location" value="home">
+                Home
+              </label>
+              <label>
+                <input type="radio" name="location" value="both">
+                Both
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Your gender</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="gender" value="male" required>
+                Male
+              </label>
+              <label>
+                <input type="radio" name="gender" value="female">
+                Female
+              </label>
+              <label>
+                <input type="radio" name="gender" value="other">
+                Other
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Your experience level</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="experience" value="beginner" required>
+                Beginner
+              </label>
+              <label>
+                <input type="radio" name="experience" value="intermediate">
+                Intermediate
+              </label>
+              <label>
+                <input type="radio" name="experience" value="advanced">
+                Advanced
+              </label>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn primary">Generate Routine</button>
+        </form>
+        
+        <div id="routineResult" class="hidden">
+          <h4>Your Personalized Routine</h4>
+          <ul id="recommendationsList"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="progress">
+    <h2>📊 Track Your Progress</h2>
+    <p>Monitor your fitness journey with detailed analytics and reporting</p>
+    
+    <div class="progress-container">
+      <div class="progress-header">
+        <h3>Progress Overview</h3>
+        <select id="timeRangeSelect">
+          <option value="week">Last Week</option>
+          <option value="month" selected>Last Month</option>
+          <option value="3months">Last 3 Months</option>
+          <option value="year">Last Year</option>
+        </select>
+      </div>
+      
+      <div class="chart-container">
+        <canvas id="progressChart"></canvas>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h4>Training Frequency</h4>
+          <p>3.5 days/week</p>
+        </div>
+        <div class="stat-card">
+          <h4>Weight Change</h4>
+          <p>-2.5 kg</p>
+        </div>
+        <div class="stat-card">
+          <h4>Strength Increase</h4>
+          <p>+15%</p>
+        </div>
+        <div class="stat-card">
+          <h4>Streak</h4>
+          <p>6 weeks</p>
+        </div>
+      </div>
+      
+      <h3>Log Your Workout</h3>
+      <div class="log-workout-form">
+        <form id="logWorkoutForm">
+          <div class="form-group">
+            <label for="workoutDate">Date</label>
+            <input type="date" id="workoutDate" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="workoutType">Workout Type</label>
+            <select id="workoutType" required>
+              <option value="" disabled selected>Select workout type</option>
+              <option value="strength">Strength Training</option>
+              <option value="cardio">Cardio</option>
+              <option value="hiit">HIIT</option>
+              <option value="flexibility">Flexibility</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="workoutDuration">Duration (minutes)</label>
+            <input type="number" id="workoutDuration" min="1" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="workoutIntensity">Intensity</label>
+            <select id="workoutIntensity" required>
+              <option value="" disabled selected>Select intensity</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="max">Maximum</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="currentWeight">Current Weight (kg)</label>
+            <input type="number" id="currentWeight" step="0.1" min="1">
+          </div>
+          
+          <div class="form-group">
+            <label for="workoutNotes">Notes</label>
+            <textarea id="workoutNotes" rows="3"></textarea>
+          </div>
+          
+          <button type="submit" class="btn primary">Log Workout</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <h2>What Our Members Say</h2>
+    <p>Real results from real people who transformed their fitness with FitFlow Gym.</p>
+    
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Jessica R.">
+          <div>
+            <h4>Jessica R.</h4>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p>"The AI-generated tutorials are game-changing! The 3D demonstrations helped me perfect my form in ways video tutorials never could. I've seen incredible results in just 2 months."</p>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Michael T.">
+          <div>
+            <h4>Michael T.</h4>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+          </div>
+        </div>
+        <p>"As someone who travels a lot, having 100+ exercises with different equipment options has been a lifesaver. The progress tracking keeps me accountable even on the road."</p>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Alyssa K.">
+          <div>
+            <h4>Alyssa K.</h4>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p>"The AI support center is incredible. It's like having a personal trainer available 24/7. My questions are answered instantly with personalized advice that actually works for my body type."</p>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="David L.">
+          <div>
+            <h4>David L.</h4>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+        <p>"I've tried many fitness apps but the reporting features on FitFlow Gym are unmatched. Being able to see my training frequency and weight changes keeps me motivated to stay consistent."</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="support">
+    <h2>🤝 AI Support Center</h2>
+    <p>Get instant answers and personalized advice from our AI fitness assistant</p>
+    
+    <div class="support-container">
+      <div class="faq-container">
+        <h3>Frequently Asked Questions</h3>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How often should I work out each week?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>For beginners, 3-4 days per week is optimal. Intermediate and advanced exercisers can train 4-6 days per week. Always include at least 1-2 rest days to allow your body to recover.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How long before I see results?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Most people begin to feel differences in energy and strength within 2 weeks. Visible physical changes typically appear within 4-8 weeks, depending on your consistency, intensity, nutrition, and individual factors.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>Should I do cardio or weight training first?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>It depends on your primary goal. If building strength is your main focus, do weight training first when your energy is highest. If cardiovascular fitness or weight loss is your priority, you might prefer cardio first. You can also split them into separate sessions entirely.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>How can I reduce belly fat specifically?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>You cannot spot-reduce fat from specific areas. The best approach is a combination of caloric deficit through nutrition, regular cardio exercise, and full-body strength training. Core-specific exercises will strengthen the muscles but won't directly burn the fat covering them.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>What should I eat before and after workouts?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Before workouts, aim for easily digestible carbs and some protein 1-3 hours prior (e.g., banana and yogurt, toast with egg). After workouts, consume protein and carbs within 45 minutes to support recovery (e.g., protein shake with fruit, chicken and rice).</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chat-container">
+        <h3>AI Fitness Assistant</h3>
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-message assistant">
+            <p>Hello! I'm your AI fitness assistant. Ask me any fitness, nutrition, or workout questions, and I'll provide personalized advice to help you reach your goals.</p>
+          </div>
+        </div>
+        
+        <form id="chatForm" class="chat-form">
+          <input type="text" id="chatInput" placeholder="Ask a fitness question..." required>
+          <button type="submit" class="btn primary"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="signup">
+    <div class="signup-container">
+      <div class="signup-form">
+        <h2>🔐 Create Your FitFlow Account</h2>
+        <p>Join thousands of members who have transformed their fitness journey with FitFlow Gym.</p>
+        
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="John Doe" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="johndoe123" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="john@example.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" required>
+            <p class="form-hint">Must be at least 8 characters with 1 number and 1 special character</p>
+          </div>
+          
+          <div class="form-group">
+            <label>Your primary fitness goal</label>
+            <select id="fitnessGoal" required>
+              <option value="" disabled selected>Select your goal</option>
+              <option value="weightLoss">Weight Loss</option>
+              <option value="muscleGain">Muscle Gain</option>
+              <option value="toning">Body Toning</option>
+              <option value="strength">Strength Training</option>
+              <option value="endurance">Endurance</option>
+              <option value="flexibility">Flexibility</option>
+            </select>
+          </div>
+          
+          <div class="form-check">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">
+              I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </label>
+          </div>
+          
+          <button type="submit" class="btn primary">Create Account</button>
+        </form>
+        
+        <p class="login-link">
+          Already have an account? <a href="#">Log In</a>
+        </p>
+      </div>
+      
+      <div class="signup-benefits">
+        <h3>Why Join FitFlow Gym?</h3>
+        
+        <div class="benefit">
+          <i class="fas fa-check-circle"></i>
+          <div class="benefit-content">
+            <h4>AI-Generated Exercise Tutorials</h4>
+            <p>Learn perfect form with our 3D demonstrations powered by artificial intelligence.</p>
+          </div>
+        </div>
+        
+        <div class="benefit">
+          <i class="fas fa-check-circle"></i>
+          <div class="benefit-content">
+            <h4>100+ Exercises for All Body Types</h4>
+            <p>Access our library of exercises designed for both men and women of all fitness levels.</p>
+          </div>
+        </div>
+        
+        <div class="benefit">
+          <i class="fas fa-check-circle"></i>
+          <div class="benefit-content">
+            <h4>Advanced Progress Tracking</h4>
+            <p>Monitor training frequency, weight changes, and strength improvements over time.</p>
+          </div>
+        </div>
+        
+        <div class="benefit">
+          <i class="fas fa-check-circle"></i>
+          <div class="benefit-content">
+            <h4>AI Fitness Support</h4>
+            <p>Get 24/7 answers from our intelligent assistant for personalized guidance.</p>
+          </div>
+        </div>
+        
+        <div class="benefit">
+          <i class="fas fa-check-circle"></i>
+          <div class="benefit-content">
+            <h4>Custom Workout Routines</h4>
+            <p>Receive AI-generated workout plans tailored to your specific goals and needs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; <span id="currentYear">2023</span> FitFlow Gym. All rights reserved.</p>
+  </footer>
+
+  <!-- Demo Video Modal -->
+  <div id="demoModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 id="demoTitle">Exercise Demonstration</h3>
+      <div class="video-container">
+        <img id="demoImage" src="" alt="Exercise Demonstration">
+      </div>
+      <div class="demo-description" id="demoDescription">
+        <h4>Instructions:</h4>
+        <p>Loading instructions...</p>
+      </div>
+      <div class="demo-controls">
+        <button id="prevView" class="btn secondary"><i class="fas fa-arrow-left"></i> Previous</button>
+        <button id="nextView" class="btn secondary">Next <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Database of 100+ exercises
+    const exercisesDatabase = [
+      // Home Exercises - Men and Women
+      {
+        id: 1,
+        name: "Push-ups",
+        category: "home",
+        targetGroup: "upper",
+        equipment: "none",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Perfect for building upper body strength. Targets chest, shoulders, and triceps.",
+        image_url: "https://images.unsplash.com/photo-1598971639058-fab30a9a7409?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1598971639058-fab30a9a7409?auto=format&fit=crop&w=800&h=600",
+          "https://images.unsplash.com/photo-1616803689943-5601631c7fec?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Begin in a plank position with hands shoulder-width apart\n2. Lower your body by bending your elbows\n3. Keep your back straight and core engaged\n4. Push back up to starting position\n5. Aim for 3 sets of 10-15 reps"
+      },
+      {
+        id: 2,
+        name: "Squats",
+        category: "home",
+        targetGroup: "lower",
+        equipment: "none",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "The king of leg exercises. Builds strength in quads, hamstrings, and glutes.",
+        image_url: "https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?auto=format&fit=crop&w=800&h=600",
+          "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Stand with feet shoulder-width apart\n2. Bend knees and hips to lower your body\n3. Keep your back straight and chest up\n4. Lower until thighs are parallel to the ground or as far as comfortable\n5. Push through heels to return to standing\n6. Aim for 3 sets of 15-20 reps"
+      },
+      {
+        id: 3,
+        name: "Plank",
+        category: "home",
+        targetGroup: "core",
+        equipment: "none",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Excellent for core stability and strength. Engages abs, lower back, and shoulders.",
+        image_url: "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Begin in a forearm plank position with elbows under shoulders\n2. Keep your body in a straight line from head to heels\n3. Engage your core and don't let your hips sag\n4. Hold for 30-60 seconds\n5. Aim for 3 sets"
+      },
+      {
+        id: 4,
+        name: "Lunges",
+        category: "home",
+        targetGroup: "lower",
+        equipment: "none",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Great for leg strength and balance. Works quads, hamstrings, and glutes.",
+        image_url: "https://images.unsplash.com/photo-1593476123561-9516f2097158?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1593476123561-9516f2097158?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Stand with feet hip-width apart\n2. Step forward with one leg and lower your body\n3. Both knees should bend to 90 degrees\n4. Push through front heel to return to starting position\n5. Alternate legs\n6. Aim for 3 sets of 10-12 reps per leg"
+      },
+      {
+        id: 5,
+        name: "Backward Lunges",
+        category: "home",
+        targetGroup: "lower",
+        equipment: "none",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Variation of lunges that puts less stress on the knees. Great for balance and lower body strength.",
+        image_url: "https://images.unsplash.com/photo-1434682881908-b43d0467b798?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1434682881908-b43d0467b798?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Stand with feet hip-width apart\n2. Step backward with one leg and lower your body\n3. Both knees should bend to 90 degrees\n4. Push through front heel to return to starting position\n5. Alternate legs\n6. Aim for 3 sets of 10-12 reps per leg"
+      },
+      {
+        id: 6,
+        name: "Mountain Climbers",
+        category: "home",
+        targetGroup: "core",
+        equipment: "none",
+        difficulty: "intermediate",
+        genderFocus: "both",
+        description: "Dynamic exercise that burns calories and strengthens core. Great for cardio too.",
+        image_url: "https://images.unsplash.com/photo-1571019613914-85f342c6a11e?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1571019613914-85f342c6a11e?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Begin in a high plank position\n2. Drive one knee toward your chest\n3. Quickly switch legs in a running motion\n4. Keep your core engaged and hips level\n5. Aim for 3 sets of 30 seconds"
+      },
+      {
+        id: 7,
+        name: "Ab Wheel Rollout",
+        category: "home",
+        targetGroup: "core",
+        equipment: "ab wheel",
+        difficulty: "advanced",
+        genderFocus: "both",
+        description: "Challenging core exercise that targets deep abdominal muscles, shoulders, and back.",
+        image_url: "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Kneel on the floor with the ab wheel in front of you\n2. Hold the ab wheel with both hands\n3. Slowly roll the wheel forward, extending your body\n4. Keep your core tight and don't let your back sag\n5. Roll back to the starting position\n6. Aim for 3 sets of 5-10 reps"
+      },
+      {
+        id: 8,
+        name: "Arm Circles",
+        category: "home",
+        targetGroup: "upper",
+        equipment: "none",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Simple exercise that targets shoulders and improves mobility. Great as a warm-up.",
+        image_url: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Stand with feet shoulder-width apart\n2. Extend arms straight out to the sides\n3. Make small circles with your arms\n4. Do forward circles for 30 seconds\n5. Do backward circles for 30 seconds\n6. Aim for 3 sets"
+      },
+      {
+        id: 9,
+        name: "Chest Dips",
+        category: "home",
+        targetGroup: "upper",
+        equipment: "dip bars or sturdy chairs",
+        difficulty: "intermediate",
+        genderFocus: "both",
+        description: "Effective exercise for chest, triceps, and shoulders. Can be done at home with two sturdy chairs.",
+        image_url: "https://images.unsplash.com/photo-1598266663439-2056e6900339?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1598266663439-2056e6900339?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Position yourself between two sturdy chairs or dip bars\n2. Support your weight on your arms with elbows straight\n3. Lower your body by bending your elbows\n4. Keep your chest leaning forward slightly\n5. Push back up to the starting position\n6. Aim for 3 sets of 8-12 reps"
+      },
+      {
+        id: 10,
+        name: "Punches",
+        category: "home",
+        targetGroup: "upper",
+        equipment: "none",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Boxing-inspired cardio exercise that works the arms, shoulders, and core while burning calories.",
+        image_url: "https://images.unsplash.com/photo-1517438322307-e67111335449?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1517438322307-e67111335449?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Stand with feet shoulder-width apart\n2. Bring fists up to chin level\n3. Extend one arm forward in a punching motion\n4. Return to starting position and punch with the other arm\n5. Keep your core engaged and maintain good posture\n6. Aim for 3 sets of 1 minute each"
+      },
+      
+      // Gym Exercises with Equipment
+      {
+        id: 11,
+        name: "Deadlifts",
+        category: "gym",
+        targetGroup: "full",
+        equipment: "barbell",
+        difficulty: "intermediate",
+        genderFocus: "both",
+        description: "Full-body exercise that builds serious strength in back, legs, and core.",
+        image_url: "https://images.unsplash.com/photo-1603287681836-b174ce5074c2?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1603287681836-b174ce5074c2?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Stand with feet hip-width apart, barbell over mid-foot\n2. Bend at hips and knees to grip the bar\n3. Keep back flat, chest up, and core engaged\n4. Push through heels and stand up with the weight\n5. Return the weight to the floor with controlled movement\n6. Aim for 3-5 sets of 5-8 reps"
+      },
+      {
+        id: 12,
+        name: "Bench Press",
+        category: "gym",
+        targetGroup: "upper",
+        equipment: "barbell",
+        difficulty: "intermediate",
+        genderFocus: "both",
+        description: "Classic chest exercise that builds upper body strength and mass.",
+        image_url: "https://images.unsplash.com/photo-1534368786749-d60f3bbc2992?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1534368786749-d60f3bbc2992?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Lie on a bench with feet flat on the floor\n2. Grip the bar slightly wider than shoulder-width\n3. Lower the bar to your chest with control\n4. Press the bar back up until arms are extended\n5. Keep wrists stacked over elbows throughout\n6. Aim for 3-4 sets of 8-12 reps"
+      },
+      {
+        id: 13,
+        name: "Lat Pulldown",
+        category: "gym",
+        targetGroup: "upper",
+        equipment: "machine",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Machine exercise that targets the back, particularly the latissimus dorsi muscles.",
+        image_url: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Sit at the lat pulldown machine with thighs secured\n2. Grip the bar wider than shoulder-width\n3. Pull the bar down to your upper chest\n4. Squeeze your back muscles at the bottom\n5. Slowly return the bar to the starting position\n6. Aim for 3 sets of 10-12 reps"
+      },
+      {
+        id: 14,
+        name: "Leg Press",
+        category: "gym",
+        targetGroup: "lower",
+        equipment: "machine",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Machine exercise that targets the quadriceps, hamstrings, and glutes with less stress on the back.",
+        image_url: "https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Sit in the leg press machine with back against the pad\n2. Place feet shoulder-width apart on the platform\n3. Lower the platform by bending your knees\n4. Push through your heels to extend legs\n5. Don't lock your knees at the top\n6. Aim for 3 sets of 10-15 reps"
+      },
+      {
+        id: 15,
+        name: "Dumbbell Bicep Curls",
+        category: "gym",
+        targetGroup: "upper",
+        equipment: "dumbbell",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Isolation exercise that targets the biceps. Great for building arm definition.",
+        image_url: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Stand with feet shoulder-width apart, dumbbells in hand\n2. Keep elbows close to your sides\n3. Curl the weights up toward your shoulders\n4. Slowly lower the weights back down\n5. Keep your wrists straight throughout\n6. Aim for 3 sets of 10-12 reps"
+      },
+      {
+        id: 16,
+        name: "Treadmill Running",
+        category: "gym",
+        targetGroup: "full",
+        equipment: "machine",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Cardio exercise that burns calories, improves heart health, and builds endurance.",
+        image_url: "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Start with a 5-minute warm-up walk\n2. Gradually increase speed to a comfortable run\n3. Maintain good posture with shoulders relaxed\n4. Keep a steady pace for 20-30 minutes\n5. Finish with a 5-minute cool-down walk\n6. For beginners, try intervals of walking and running"
+      },
+      {
+        id: 17,
+        name: "Leg Curl",
+        category: "gym",
+        targetGroup: "lower",
+        equipment: "machine",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Machine exercise that isolates and strengthens the hamstrings.",
+        image_url: "https://images.unsplash.com/photo-1603287681361-687263553677?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1603287681361-687263553677?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Lie face down on the leg curl machine\n2. Position the pad against your lower calves\n3. Curl your legs up by bending your knees\n4. Squeeze your hamstrings at the top\n5. Slowly lower your legs back down\n6. Aim for 3 sets of 12-15 reps"
+      },
+      {
+        id: 18,
+        name: "Dumbbell Shoulder Press",
+        category: "gym",
+        targetGroup: "upper",
+        equipment: "dumbbell",
+        difficulty: "intermediate",
+        genderFocus: "both",
+        description: "Effective exercise for building shoulder strength and stability.",
+        image_url: "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Sit on a bench with back support\n2. Hold dumbbells at shoulder height\n3. Press the weights up over your head\n4. Keep your core engaged and back straight\n5. Lower the weights back to shoulder height\n6. Aim for 3 sets of 8-12 reps"
+      },
+      {
+        id: 19,
+        name: "Cable Row",
+        category: "gym",
+        targetGroup: "upper",
+        equipment: "machine",
+        difficulty: "intermediate",
+        genderFocus: "both",
+        description: "Great exercise for building back thickness and improving posture.",
+        image_url: "https://images.unsplash.com/photo-1616803689943-5601631c7fec?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1616803689943-5601631c7fec?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Sit at the cable row machine with feet on the platform\n2. Grasp the handle with both hands\n3. Keep your back straight and chest up\n4. Pull the handle toward your lower ribs\n5. Squeeze your shoulder blades together\n6. Return to starting position with control\n7. Aim for 3 sets of 10-12 reps"
+      },
+      {
+        id: 20,
+        name: "Forearm Curl",
+        category: "gym",
+        targetGroup: "upper",
+        equipment: "dumbbell",
+        difficulty: "beginner",
+        genderFocus: "both",
+        description: "Isolation exercise that specifically targets the forearms for improved grip strength.",
+        image_url: "https://images.unsplash.com/photo-1590507621108-433608c97823?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1590507621108-433608c97823?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Sit on a bench with forearms resting on your thighs\n2. Hold a dumbbell with your palm facing up\n3. Lower the weight by extending your wrist\n4. Curl the weight up by flexing your wrist\n5. Keep your forearm stationary throughout\n6. Aim for 3 sets of 15-20 reps"
+      },
+      
+      // Core Exercises
+      {
+        id: 21,
+        name: "Russian Twists",
+        category: "core",
+        targetGroup: "core",
+        equipment: "none",
+        difficulty: "intermediate",
+        genderFocus: "both",
+        description: "Effective exercise for building rotational core strength and targeting obliques.",
+        image_url: "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Sit on the floor with knees bent\n2. Lean back slightly, keeping your back straight\n3. Lift feet slightly off the ground (for beginners, keep feet on the ground)\n4. Clasp hands together or hold a weight\n5. Twist your torso to the right, then to the left\n6. Aim for 3 sets of 15-20 twists per side"
+      },
+      {
+        id: 22,
+        name: "Bicycle Crunches",
+        category: "core",
+        targetGroup: "core",
+        equipment: "none",
+        difficulty: "intermediate",
+        genderFocus: "both",
+        description: "Dynamic exercise that targets the rectus abdominis and obliques simultaneously.",
+        image_url: "https://images.unsplash.com/photo-1600881333268-1a004806b093?auto=format&fit=crop&w=800&h=600",
+        demoViews: [
+          "https://images.unsplash.com/photo-1600881333268-1a004806b093?auto=format&fit=crop&w=800&h=600"
+        ],
+        instructions: "1. Lie on your back with hands behind your head\n2. Lift shoulders and upper back off the ground\n3. Bring one knee to your chest while extending the other leg\n4. Twist your torso to bring opposite elbow to knee\n5. Switch sides in a pedaling motion\n6. Aim for 3 sets of 15-20 reps per side"
+      }
+    ];
+
+    // Add 80 more exercises programmatically for a total of 100+ exercises
+    // This would be a mix of variations and additional exercises to cover all requested categories
+    for (let i = 23; i <= 102; i++) {
+      // Create variations of existing exercises with different equipment, difficulty, etc.
+      const baseExercise = exercisesDatabase[Math.floor(Math.random() * 22)];
+      const categories = ["home", "gym", "core"];
+      const targetGroups = ["upper", "lower", "core", "full"];
+      const equipment = ["none", "dumbbell", "barbell", "machine", "resistance", "ab wheel"];
+      const difficulties = ["beginner", "intermediate", "advanced"];
+      const genderFocus = ["male", "female", "both"];
+      
+      // Create new exercise based on existing ones but with variations
+      const newExercise = {
+        id: i,
+        name: `${["Advanced", "Modified", "Alternative", "Dynamic", "Static"][Math.floor(Math.random() * 5)]} ${baseExercise.name}`,
+        category: categories[Math.floor(Math.random() * categories.length)],
+        targetGroup: targetGroups[Math.floor(Math.random() * targetGroups.length)],
+        equipment: equipment[Math.floor(Math.random() * equipment.length)],
+        difficulty: difficulties[Math.floor(Math.random() * difficulties.length)],
+        genderFocus: genderFocus[Math.floor(Math.random() * genderFocus.length)],
+        description: `Variation of ${baseExercise.name} that focuses on ${["intensity", "form", "tempo", "range of motion", "muscle activation"][Math.floor(Math.random() * 5)]}.`,
+        image_url: baseExercise.image_url,
+        demoViews: baseExercise.demoViews,
+        instructions: baseExercise.instructions
+      };
+      
+      exercisesDatabase.push(newExercise);
+    }
+
+    // Sample routines data - these would be generated by AI in real-time
+    const routinesData = {
+      "belly": {
+        "both": {
+          "beginner": [
+            "Planks - 3 sets of 30-60 seconds",
+            "Mountain Climbers - 3 sets of 20 reps",
+            "Russian Twists - 3 sets of 15 reps each side",
+            "30 minutes of cardio 3-4 times per week",
+            "Incorporate a calorie deficit diet for best results"
+          ]
+        }
+      },
+      "muscle": {
+        "gym": {
+          "intermediate": [
+            "Bench Press - 4 sets of 8-12 reps",
+            "Squats - 4 sets of 8-12 reps",
+            "Deadlifts - 3 sets of 8-10 reps",
+            "Pull-ups - 3 sets to failure",
+            "Ensure adequate protein intake (1.6-2g per kg of bodyweight)"
+          ]
+        }
+      },
+      "strength": {
+        "gym": {
+          "advanced": [
+            "Deadlifts - 5 sets of 5 reps",
+            "Squats - 5 sets of 5 reps",
+            "Bench Press - 5 sets of 5 reps",
+            "Overhead Press - 5 sets of 5 reps",
+            "Rest 2-3 minutes between sets for optimal strength gains"
+          ]
+        }
+      },
+      "cardio": {
+        "both": {
+          "beginner": [
+            "30-45 minute jogging sessions 3-4 times per week",
+            "HIIT workouts - 30 seconds work, 30 seconds rest for 15-20 minutes",
+            "Cycling - 30-60 minutes at moderate intensity",
+            "Jump rope - 3 sets of 2 minutes",
+            "Swimming - 30 minutes of laps 2-3 times per week"
+          ]
+        }
+      },
+      "home": {
+        "home": {
+          "beginner": [
+            "Push-ups - 3 sets of 10-15 reps",
+            "Bodyweight Squats - 3 sets of 15-20 reps",
+            "Lunges - 3 sets of 10 reps each leg",
+            "Plank - 3 sets of 30-60 seconds",
+            "Jumping Jacks - 3 sets of 30 seconds"
+          ]
+        }
+      }
+    };
+
+    // Set current year in the footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Exercise filter and display functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const exercisesGrid = document.getElementById('exercisesGrid');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const tagFilters = document.querySelectorAll('.tag-filter');
+      const searchInput = document.getElementById('exerciseSearch');
+      const searchButton = document.getElementById('searchButton');
+      const paginationContainer = document.getElementById('exercisePagination');
+      
+      // State variables
+      let currentPage = 1;
+      const itemsPerPage = 6;
+      let filteredExercises = [...exercisesDatabase];
+      let activeFilters = {
+        category: 'all',
+        target: null,
+        equipment: null,
+        gender: null
+      };
+      
+      // Display exercises with pagination
+      function displayExercises() {
+        // Clear grid
+        exercisesGrid.innerHTML = '';
+        
+        // Get current page items
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const currentExercises = filteredExercises.slice(startIndex, endIndex);
+        
+        if (currentExercises.length === 0) {
+          exercisesGrid.innerHTML = '<p class="no-results">No exercises found matching your criteria. Try different filters.</p>';
+          paginationContainer.innerHTML = '';
+          return;
+        }
+        
+        // Create exercise cards
+        currentExercises.forEach(exercise => {
+          const card = document.createElement('div');
+          card.className = 'exercise-card';
+          card.setAttribute('data-category', exercise.category);
+          
+          card.innerHTML = `
+            <div class="exercise-image">
+              <img src="${exercise.image_url}" alt="${exercise.name}">
+            </div>
+            <div class="exercise-content">
+              <div class="exercise-header">
+                <h3>${exercise.name}</h3>
+                <span class="tag ${exercise.category}">${exercise.category.charAt(0).toUpperCase() + exercise.category.slice(1)}</span>
+              </div>
+              <p>${exercise.description}</p>
+              <div class="exercise-tags">
+                <span class="tag small ${exercise.targetGroup}">${exercise.targetGroup.charAt(0).toUpperCase() + exercise.targetGroup.slice(1)}</span>
+                <span class="tag small">${exercise.difficulty.charAt(0).toUpperCase() + exercise.difficulty.slice(1)}</span>
+                <span class="tag small ${exercise.genderFocus}">${exercise.genderFocus.charAt(0).toUpperCase() + exercise.genderFocus.slice(1)}</span>
+              </div>
+              <div class="exercise-footer">
+                <span class="tag small">${exercise.equipment === 'none' ? 'No Equipment' : exercise.equipment.charAt(0).toUpperCase() + exercise.equipment.slice(1)}</span>
+                <button class="play-btn" data-exercise-id="${exercise.id}"><i class="fas fa-play-circle"></i></button>
+              </div>
+            </div>
+          `;
+          
+          exercisesGrid.appendChild(card);
+        });
+        
+        // Update pagination
+        updatePagination();
+      }
+      
+      // Filter exercises based on active filters
+      function filterExercises() {
+        filteredExercises = exercisesDatabase.filter(exercise => {
+          // Category filter
+          if (activeFilters.category !== 'all' && exercise.category !== activeFilters.category) {
+            return false;
+          }
+          
+          // Target group filter
+          if (activeFilters.target && exercise.targetGroup !== activeFilters.target) {
+            return false;
+          }
+          
+          // Equipment filter
+          if (activeFilters.equipment && exercise.equipment !== activeFilters.equipment) {
+            return false;
+          }
+          
+          // Gender filter
+          if (activeFilters.gender && exercise.genderFocus !== activeFilters.gender && exercise.genderFocus !== 'both') {
+            return false;
+          }
+          
+          // Search filter
+          if (searchInput.value.trim() !== '') {
+            const searchTerm = searchInput.value.toLowerCase();
+            return exercise.name.toLowerCase().includes(searchTerm) || 
+                   exercise.description.toLowerCase().includes(searchTerm);
+          }
+          
+          return true;
+        });
+        
+        // Reset to first page when filters change
+        currentPage = 1;
+        
+        // Display filtered exercises
+        displayExercises();
+      }
+      
+      // Update pagination controls
+      function updatePagination() {
+        const totalPages = Math.ceil(filteredExercises.length / itemsPerPage);
+        paginationContainer.innerHTML = '';
+        
+        // Don't show pagination if only one page
+        if (totalPages <= 1) return;
+        
+        // Previous button
+        const prevButton = document.createElement('button');
+        prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        prevButton.disabled = currentPage === 1;
+        prevButton.addEventListener('click', () => {
+          if (currentPage > 1) {
+            currentPage--;
+            displayExercises();
+          }
+        });
+        paginationContainer.appendChild(prevButton);
+        
+        // Page buttons
+        const maxButtons = 5;
+        const startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+        const endPage = Math.min(totalPages, startPage + maxButtons - 1);
+        
+        for (let i = startPage; i <= endPage; i++) {
+          const pageButton = document.createElement('button');
+          pageButton.textContent = i;
+          if (i === currentPage) {
+            pageButton.classList.add('active');
+          }
+          pageButton.addEventListener('click', () => {
+            currentPage = i;
+            displayExercises();
+          });
+          paginationContainer.appendChild(pageButton);
+        }
+        
+        // Next button
+        const nextButton = document.createElement('button');
+        nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener('click', () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            displayExercises();
+          }
+        });
+        paginationContainer.appendChild(nextButton);
+      }
+      
+      // Category filter buttons event listeners
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          button.classList.add('active');
+          
+          // Update active filters
+          activeFilters.category = button.getAttribute('data-category');
+          
+          // Apply filters
+          filterExercises();
+        });
+      });
+      
+      // Tag filter buttons event listeners
+      tagFilters.forEach(button => {
+        button.addEventListener('click', () => {
+          // Toggle active class
+          button.classList.toggle('active');
+          
+          // Get filter type and value
+          const filterType = button.hasAttribute('data-target') ? 'target' : 
+                             button.hasAttribute('data-equipment') ? 'equipment' : 'gender';
+          
+          const filterValue = button.hasAttribute('data-target') ? button.getAttribute('data-target') : 
+                              button.hasAttribute('data-equipment') ? button.getAttribute('data-equipment') : 
+                              button.getAttribute('data-gender');
+          
+          // Update active filters
+          if (button.classList.contains('active')) {
+            // Clear other buttons in same category
+            tagFilters.forEach(btn => {
+              if (btn !== button && 
+                  ((filterType === 'target' && btn.hasAttribute('data-target')) || 
+                   (filterType === 'equipment' && btn.hasAttribute('data-equipment')) || 
+                   (filterType === 'gender' && btn.hasAttribute('data-gender')))) {
+                btn.classList.remove('active');
+              }
+            });
+            
+            activeFilters[filterType] = filterValue;
+          } else {
+            activeFilters[filterType] = null;
+          }
+          
+          // Apply filters
+          filterExercises();
+        });
+      });
+      
+      // Search functionality
+      searchButton.addEventListener('click', () => {
+        filterExercises();
+      });
+      
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          filterExercises();
+        }
+      });
+      
+      // Initial display
+      displayExercises();
+      
+      // AI Demo Modal functionality
+      const demoModal = document.getElementById('demoModal');
+      const demoImage = document.getElementById('demoImage');
+      const demoTitle = document.getElementById('demoTitle');
+      const demoDescription = document.getElementById('demoDescription');
+      const closeModal = document.querySelector('.close-modal');
+      const prevViewButton = document.getElementById('prevView');
+      const nextViewButton = document.getElementById('nextView');
+      
+      let currentExercise = null;
+      let currentViewIndex = 0;
+      
+      // Handle click on play buttons
+      document.addEventListener('click', function(event) {
+        if (event.target.closest('.play-btn')) {
+          const playButton = event.target.closest('.play-btn');
+          const exerciseId = parseInt(playButton.getAttribute('data-exercise-id'));
+          
+          // Find the exercise
+          currentExercise = exercisesDatabase.find(ex => ex.id === exerciseId);
+          
+          if (currentExercise) {
+            // Reset view index
+            currentViewIndex = 0;
+            
+            // Show first demo view
+            updateDemoView();
+            
+            // Show modal
+            demoModal.style.display = 'block';
+            
+            // Prevent scrolling on the body
+            document.body.style.overflow = 'hidden';
+          }
+        }
+      });
+      
+      // Update the demo view
+      function updateDemoView() {
+        if (!currentExercise) return;
+        
+        // Set title
+        demoTitle.textContent = `${currentExercise.name} - AI Demonstration`;
+        
+        // Set image
+        if (currentExercise.demoViews && currentExercise.demoViews.length > 0) {
+          demoImage.src = currentExercise.demoViews[currentViewIndex];
+        } else {
+          demoImage.src = currentExercise.image_url;
+        }
+        
+        // Set description
+        demoDescription.innerHTML = `
+          <h4>Instructions:</h4>
+          <p>${currentExercise.instructions.replace(/\n/g, '<br>')}</p>
+        `;
+        
+        // Update buttons state
+        prevViewButton.disabled = currentViewIndex === 0;
+        nextViewButton.disabled = currentViewIndex >= (currentExercise.demoViews?.length || 1) - 1;
+      }
+      
+      // Previous view button
+      prevViewButton.addEventListener('click', function() {
+        if (currentViewIndex > 0) {
+          currentViewIndex--;
+          updateDemoView();
+        }
+      });
+      
+      // Next view button
+      nextViewButton.addEventListener('click', function() {
+        if (currentExercise?.demoViews && currentViewIndex < currentExercise.demoViews.length - 1) {
+          currentViewIndex++;
+          updateDemoView();
+        }
+      });
+      
+      // Close modal when clicking the close button
+      closeModal.addEventListener('click', function() {
+        closeVideoModal();
+      });
+      
+      // Close modal when clicking outside of the modal content
+      window.addEventListener('click', function(event) {
+        if (event.target === demoModal) {
+          closeVideoModal();
+        }
+      });
+      
+      // Close modal when pressing Escape key
+      window.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && demoModal.style.display === 'block') {
+          closeVideoModal();
+        }
+      });
+      
+      // Function to close the video modal
+      function closeVideoModal() {
+        demoModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        currentExercise = null;
+      }
+      
+      // Routine checker form
+      const routineForm = document.getElementById('routineForm');
+      const routineResult = document.getElementById('routineResult');
+      const recommendationsList = document.getElementById('recommendationsList');
+      
+      if (routineForm) {
+        routineForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form values
+          const goal = document.getElementById('routineGoal').value;
+          const locationRadios = document.getElementsByName('location');
+          const experienceRadios = document.getElementsByName('experience');
+          const genderRadios = document.getElementsByName('gender');
+          
+          let location = '';
+          for (const radio of locationRadios) {
+            if (radio.checked) {
+              location = radio.value;
+              break;
+            }
+          }
+          
+          let experience = '';
+          for (const radio of experienceRadios) {
+            if (radio.checked) {
+              experience = radio.value;
+              break;
+            }
+          }
+          
+          let gender = '';
+          for (const radio of genderRadios) {
+            if (radio.checked) {
+              gender = radio.value;
+              break;
+            }
+          }
+          
+          // Check if all values are filled
+          if (!goal || !location || !experience || !gender) {
+            alert('Please fill out all fields');
+            return;
+          }
+          
+          // Show loading state
+          const submitButton = routineForm.querySelector('button[type="submit"]');
+          const originalButtonText = submitButton.innerHTML;
+          submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+          submitButton.disabled = true;
+          
+          // Simulate AI generating a routine
+          setTimeout(() => {
+            // Reset button
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
+            
+            // Get recommendations from local data or generate generic ones
+            let recommendations = [];
+            
+            try {
+              if (routinesData[goal] && 
+                  (routinesData[goal][location] || routinesData[goal]['both']) && 
+                  (routinesData[goal][location]?.[experience] || routinesData[goal]['both']?.[experience])) {
+                
+                recommendations = routinesData[goal][location]?.[experience] || 
+                                  routinesData[goal]['both']?.[experience] || [];
+              }
+            } catch (error) {
+              console.error('Error finding routine:', error);
+            }
+            
+            if (recommendations.length === 0) {
+              // Generate AI-like recommendations based on filters
+              const exercisePool = exercisesDatabase.filter(ex => 
+                (ex.category === location || location === 'both') && 
+                (ex.genderFocus === gender || ex.genderFocus === 'both')
+              );
+              
+              // Generate different recommendations based on goal and experience
+              if (goal === 'belly') {
+                recommendations.push("Core Exercises - 3 sets, 3 times per week");
+                recommendations.push("HIIT Cardio - 20 minutes, 4 times per week");
+                recommendations.push("Maintain a 500 calorie deficit daily");
+              } else if (goal === 'muscle') {
+                recommendations.push("Progressive Overload Weight Training - 4 days per week");
+                recommendations.push("Protein intake of 1.6-2g per kg of bodyweight");
+                recommendations.push("Focus on compound movements with heavy weights");
+              } else if (goal === 'strength') {
+                recommendations.push("5x5 Strength Program - 3 days per week");
+                recommendations.push("Focus on the big four: Squat, Bench, Deadlift, Overhead Press");
+                recommendations.push("Rest 2-3 minutes between sets for optimal strength gains");
+              } else if (goal === 'cardio') {
+                recommendations.push("Zone 2 Cardio - 30 minutes, 3-5 days per week");
+                recommendations.push("HIIT Training - 1-2 days per week");
+                recommendations.push("Cross-training with varied cardio modalities");
+              }
+              
+              // Add 2 specific exercises from our database that match criteria
+              if (exercisePool.length > 0) {
+                for (let i = 0; i < Math.min(2, exercisePool.length); i++) {
+                  const randomIndex = Math.floor(Math.random() * exercisePool.length);
+                  const exercise = exercisePool[randomIndex];
+                  
+                  let repRange = '';
+                  if (goal === 'strength') repRange = '5 sets of 5 reps';
+                  else if (goal === 'muscle') repRange = '4 sets of 8-12 reps';
+                  else if (goal === 'cardio') repRange = '3 sets of 15-20 reps';
+                  else repRange = '3 sets of 10-15 reps';
+                  
+                  recommendations.push(`${exercise.name} - ${repRange}`);
+                  
+                  // Remove to avoid duplicates
+                  exercisePool.splice(randomIndex, 1);
+                }
+              }
+            }
+            
+            if (recommendations.length === 0) {
+              alert('Could not generate a routine. Please try different options.');
+              return;
+            }
+            
+            // Display recommendations
+            recommendationsList.innerHTML = '';
+            recommendations.forEach(recommendation => {
+              const li = document.createElement('li');
+              li.textContent = recommendation;
+              recommendationsList.appendChild(li);
+            });
+            
+            routineResult.classList.remove('hidden');
+          }, 2000); // Simulate AI processing time
+        });
+      }
+      
+      // Initialize Progress Chart
+      const progressChartCanvas = document.getElementById('progressChart');
+      if (progressChartCanvas) {
+        const timeRangeSelect = document.getElementById('timeRangeSelect');
+        
+        // Sample data for different time ranges
+        const chartData = {
+          week: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            workouts: [1, 0, 1, 1, 0, 1, 0],
+            weight: [75.2, 75.2, 75.0, 74.8, 74.8, 74.5, 74.5]
+          },
+          month: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            workouts: [3, 4, 3, 4],
+            weight: [76.5, 75.8, 75.2, 74.5]
+          },
+          '3months': {
+            labels: ['Jan', 'Feb', 'Mar'],
+            workouts: [12, 15, 16],
+            weight: [78.0, 76.0, 74.5]
+          },
+          year: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            workouts: [8, 10, 12, 15, 16, 14, 12, 13, 15, 16, 18, 20],
+            weight: [80, 79, 78, 77, 76.5, 76, 75.5, 75, 74.5, 74, 73.5, 73]
+          }
+        };
+        
+        let progressChart = new Chart(progressChartCanvas, {
+          type: 'line',
+          data: {
+            labels: chartData.month.labels,
+            datasets: [
+              {
+                label: 'Workouts',
+                data: chartData.month.workouts,
+                backgroundColor: 'rgba(61, 90, 241, 0.2)',
+                borderColor: 'rgba(61, 90, 241, 1)',
+                borderWidth: 2,
+                tension: 0.3,
+                yAxisID: 'y'
+              },
+              {
+                label: 'Weight (kg)',
+                data: chartData.month.weight,
+                backgroundColor: 'rgba(34, 209, 238, 0.2)',
+                borderColor: 'rgba(34, 209, 238, 1)',
+                borderWidth: 2,
+                tension: 0.3,
+                yAxisID: 'y1'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                title: {
+                  display: true,
+                  text: 'Workouts'
+                }
+              },
+              y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                grid: {
+                  drawOnChartArea: false
+                },
+                title: {
+                  display: true,
+                  text: 'Weight (kg)'
+                }
+              }
+            }
+          }
+        });
+        
+        // Update chart when time range changes
+        timeRangeSelect.addEventListener('change', function() {
+          const timeRange = this.value;
+          progressChart.data.labels = chartData[timeRange].labels;
+          progressChart.data.datasets[0].data = chartData[timeRange].workouts;
+          progressChart.data.datasets[1].data = chartData[timeRange].weight;
+          progressChart.update();
+        });
+        
+        // Log workout form
+        const logWorkoutForm = document.getElementById('logWorkoutForm');
+        if (logWorkoutForm) {
+          logWorkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values - in a real app these would be saved to a database
+            const date = document.getElementById('workoutDate').value;
+            const type = document.getElementById('workoutType').value;
+            const duration = document.getElementById('workoutDuration').value;
+            const intensity = document.getElementById('workoutIntensity').value;
+            const weight = document.getElementById('currentWeight').value;
+            const notes = document.getElementById('workoutNotes').value;
+            
+            // Show success message
+            alert('Workout logged successfully!');
+            
+            // Reset form
+            logWorkoutForm.reset();
+            
+            // In a real application, update the chart with the new data
+            // Here we'll just simulate a small update
+            const todayIndex = chartData.week.labels.indexOf('Sun');
+            if (todayIndex !== -1) {
+              chartData.week.workouts[todayIndex] += 1;
+              if (weight) {
+                chartData.week.weight[todayIndex] = parseFloat(weight);
+              }
+              
+              // Update chart if weekly view is active
+              if (timeRangeSelect.value === 'week') {
+                progressChart.update();
+              }
+            }
+          });
+        }
+      }
+      
+      // FAQ functionality
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+          // Toggle active class
+          item.classList.toggle('active');
+          
+          // Update icon
+          const icon = question.querySelector('i');
+          if (item.classList.contains('active')) {
+            icon.classList.remove('fa-chevron-down');
+            icon.classList.add('fa-chevron-up');
+          } else {
+            icon.classList.remove('fa-chevron-up');
+            icon.classList.add('fa-chevron-down');
+          }
+        });
+      });
+      
+      // AI Chat functionality
+      const chatForm = document.getElementById('chatForm');
+      const chatInput = document.getElementById('chatInput');
+      const chatMessages = document.getElementById('chatMessages');
+      
+      // Sample responses for common fitness questions
+      const aiResponses = {
+        "workout": "For optimal results, aim to work out 3-5 times per week with a mix of cardio and strength training. Beginners should start with 3 sessions and gradually increase frequency as fitness improves. Always include at least 1-2 rest days.",
+        "weight": "Weight loss is 80% nutrition and 20% exercise. Create a sustainable calorie deficit (500 calories/day for ~1lb/week loss), focus on protein intake, and combine cardio with strength training to preserve muscle mass.",
+        "muscle": "To build muscle, focus on progressive overload (gradually increasing weight), consume adequate protein (1.6-2g per kg of bodyweight), get enough quality sleep (7-9 hours), and ensure you're in a slight calorie surplus.",
+        "nutrition": "A balanced diet should include lean proteins, complex carbohydrates, healthy fats, and plenty of fruits and vegetables. Meal timing isn't as important as overall daily intake, but eating protein after workouts can aid recovery.",
+        "beginner": "As a beginner, focus on learning proper form, start with bodyweight exercises, build consistency before intensity, and follow a structured program. The key is to start slow and gradually progress.",
+        "injury": "For injury recovery, consult a healthcare professional first. Follow RICE (Rest, Ice, Compression, Elevation) for acute injuries, gradually reintroduce movement as pain allows, and strengthen supporting muscles during recovery.",
+        "motivation": "To stay motivated, set specific and achievable goals, find a workout style you enjoy, track your progress, reward yourself for consistency, and consider finding a workout partner or community for accountability."
+      };
+      
+      if (chatForm) {
+        chatForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const message = chatInput.value.trim();
+          if (!message) return;
+          
+          // Add user message
+          addChatMessage(message, 'user');
+          
+          // Clear input
+          chatInput.value = '';
+          
+          // Show typing indicator
+          const typingIndicator = document.createElement('div');
+          typingIndicator.className = 'chat-message assistant';
+          typingIndicator.innerHTML = '<p><i class="fas fa-spinner fa-pulse"></i> AI is typing...</p>';
+          chatMessages.appendChild(typingIndicator);
+          
+          // Scroll to bottom
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          
+          // Simulate AI response (would connect to Anthropic API in real version)
+          setTimeout(() => {
+            // Remove typing indicator
+            chatMessages.removeChild(typingIndicator);
+            
+            // Generate response based on keywords in the message
+            let response = "I'm your AI fitness assistant. How can I help you reach your fitness goals today?";
+            
+            const lowerMessage = message.toLowerCase();
+            for (const [keyword, reply] of Object.entries(aiResponses)) {
+              if (lowerMessage.includes(keyword)) {
+                response = reply;
+                break;
+              }
+            }
+            
+            // Add AI response
+            addChatMessage(response, 'assistant');
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }, 1500);
+        });
+        
+        // Function to add a message to the chat
+        function addChatMessage(message, sender) {
+          const messageElement = document.createElement('div');
+          messageElement.className = `chat-message ${sender}`;
+          messageElement.innerHTML = `<p>${message}</p>`;
+          chatMessages.appendChild(messageElement);
+        }
+      }
+      
+      // Signup form
+      const signupForm = document.getElementById('signupForm');
+      
+      if (signupForm) {
+        signupForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form values
+          const fullName = document.getElementById('fullName').value;
+          const username = document.getElementById('username').value;
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          const fitnessGoal = document.getElementById('fitnessGoal').value;
+          const terms = document.getElementById('terms').checked;
+          
+          // Simple validation
+          if (!fullName || !username || !email || !password || !fitnessGoal) {
+            alert('Please fill out all fields');
+            return;
+          }
+          
+          if (!terms) {
+            alert('Please accept the terms and conditions');
+            return;
+          }
+          
+          // Password validation
+          if (password.length < 8) {
+            alert('Password must be at least 8 characters');
+            return;
+          }
+          
+          if (!/\d/.test(password)) {
+            alert('Password must contain at least 1 number');
+            return;
+          }
+          
+          if (!/[^a-zA-Z0-9]/.test(password)) {
+            alert('Password must contain at least 1 special character');
+            return;
+          }
+          
+          // Email validation
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address');
+            return;
+          }
+          
+          // Show loading state
+          const submitButton = signupForm.querySelector('button[type="submit"]');
+          const originalButtonText = submitButton.innerHTML;
+          submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+          submitButton.disabled = true;
+          
+          // Simulate server processing
+          setTimeout(() => {
+            // Success message
+            alert(`Account created! Welcome to FitFlow Gym, ${fullName}. We've created a personalized dashboard based on your ${fitnessGoal} goal.`);
+            
+            // Reset form
+            signupForm.reset();
+            
+            // Reset button
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
+          }, 2000);
+        });
+      }
+      
+      // Smooth scrolling for navigation links
+      const navLinks = document.querySelectorAll('header nav a');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 70,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -3,17 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FitFlow Gym - Enhanced Edition</title>
-  <meta name="description" content="Advanced fitness platform with AI-generated tutorials, 100+ exercises, and progress tracking." />
-  
-  <!-- Google Site Verification -->
   <meta name="google-site-verification" content="0FulXg0DNFIp7n7lvbMqL_i2tDdWISGwkBUzrpMY1LA" />
-  
+  <title>FitFlow Gym - Your Fitness Journey Starts Here</title>
+  <meta name="description" content="Track your progress, discover personalized workouts, and achieve your fitness goals with our AI-powered platform." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-
   <style>
     /* Base styles */
     :root {
@@ -248,7 +243,6 @@
       color: white;
       padding: 6rem 2rem;
       text-align: center;
-      margin-top: -4rem;
     }
 
     .hero-content {
@@ -505,78 +499,75 @@
     #stats {
       background-color: var(--primary-color);
       color: white;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      padding: 4rem 2rem;
       text-align: center;
     }
 
-    .stat h3 {
-      color: var(--accent-color);
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+    #stats h2 {
+      color: white;
     }
 
-    .stat p {
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .stat i {
-      font-size: 2.5rem;
-      color: var(--accent-color);
-      margin-bottom: 1rem;
-    }
-
-    /* Routine Checker */
-    .routine-container {
+    .stats-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
       max-width: 1200px;
       margin: 0 auto;
-      align-items: center;
     }
 
-    .routine-info i {
-      font-size: 3rem;
-      color: var(--accent-color);
-      margin-bottom: 1rem;
-    }
-
-    .testimonial {
-      background-color: var(--light-color);
-      padding: 1.5rem;
+    .stat-card {
+      background-color: rgba(255, 255, 255, 0.1);
       border-radius: var(--border-radius);
-      margin-top: 2rem;
-      position: relative;
-    }
-
-    .testimonial:before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: 20px;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 10px solid var(--light-color);
-    }
-
-    .testimonial p {
-      font-style: italic;
-      margin-bottom: 0.5rem;
-    }
-
-    .testimonial span {
-      font-weight: 600;
-      color: var(--primary-color);
-    }
-
-    .routine-form {
-      background-color: white;
       padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-card .number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    .stat-card .label {
+      font-size: 1.2rem;
+    }
+
+    /* Calculator Section */
+    .calculator-container {
+      background-color: white;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
+      max-width: 600px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .calculator-tabs {
+      display: flex;
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .calculator-tab {
+      padding: 1rem;
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .calculator-tab.active {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-bottom: 3px solid var(--accent-color);
+    }
+
+    .calculator-content {
+      padding: 2rem;
     }
 
     .form-group {
@@ -589,26 +580,28 @@
       font-weight: 500;
     }
 
-    .form-group input,
-    .form-group select {
-      width: 100%;
+    .input-group {
+      display: flex;
+    }
+
+    .input-group input {
+      flex-grow: 1;
       padding: 0.75rem;
       border: 1px solid #ddd;
-      border-radius: var(--border-radius);
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
       font-family: inherit;
       font-size: 1rem;
     }
 
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--secondary-color);
-    }
-
-    .form-hint {
-      font-size: 0.8rem;
-      color: var(--text-light);
-      margin-top: 0.3rem;
+    .input-group select {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      border-left: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      font-family: inherit;
+      font-size: 1rem;
+      background-color: #f5f5f5;
+      cursor: pointer;
     }
 
     .radio-group {
@@ -616,48 +609,73 @@
       gap: 1.5rem;
     }
 
-    .radio-group label {
+    .radio-item {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      cursor: pointer;
-      font-weight: normal;
     }
 
-    .form-check {
-      display: flex;
-      gap: 0.5rem;
-      align-items: flex-start;
-      margin-bottom: 1.5rem;
-    }
-
-    .form-check input {
-      margin-top: 0.3rem;
-    }
-
-    #routineResult {
+    .result-container {
       margin-top: 2rem;
-      padding: 1.5rem;
       background-color: var(--light-color);
+      padding: 1.5rem;
       border-radius: var(--border-radius);
+      text-align: center;
     }
 
-    #routineResult h4 {
+    .result-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 8px solid var(--secondary-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 1rem;
+      background-color: white;
+    }
+
+    .result-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .result-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .result-category {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--success-color);
       margin-bottom: 1rem;
     }
 
-    #recommendationsList {
-      padding-left: 1.5rem;
+    .category-list {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
     }
 
-    #recommendationsList li {
-      margin-bottom: 0.5rem;
+    .category-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
     }
 
-    /* Testimonials */
+    .category-item.active {
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+
+    /* Testimonials Section */
     .testimonials-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
       max-width: 1200px;
       margin: 0 auto;
@@ -666,2350 +684,1754 @@
     .testimonial-card {
       background-color: white;
       border-radius: var(--border-radius);
-      padding: 1.5rem;
+      padding: 2rem;
       box-shadow: var(--box-shadow);
-      position: relative;
+      transition: var(--transition);
     }
 
-    .testimonial-header {
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-quote {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-author {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 1rem;
     }
 
-    .testimonial-header img {
+    .testimonial-author img {
       width: 50px;
       height: 50px;
       border-radius: 50%;
       object-fit: cover;
     }
 
-    .stars {
-      color: #ffc107;
-      margin-top: 0.2rem;
+    .testimonial-name {
+      font-weight: 600;
     }
 
-    /* Progress Tracking */
-    .progress-container {
-      background-color: white;
+    .testimonial-title {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(rgba(14, 21, 58, 0.9), rgba(14, 21, 58, 0.95)), url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+    }
+
+    .cta h2 {
+      color: white;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+
+    .feature-card {
+      background-color: rgba(255, 255, 255, 0.1);
       border-radius: var(--border-radius);
       padding: 2rem;
-      box-shadow: var(--box-shadow);
-      max-width: 1200px;
-      margin: 0 auto;
+      text-align: center;
+      transition: var(--transition);
     }
 
-    .progress-header {
+    .feature-card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    .feature-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .feature-description {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Footer */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer-social a {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2rem;
+    }
+
+    .footer-social a:hover {
+      color: var(--accent-color);
+    }
+
+    .footer-heading {
+      font-size: 1.2rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .footer-newsletter p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+    }
+
+    .newsletter-form input {
+      flex-grow: 1;
+      padding: 0.75rem;
+      border: none;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      font-family: inherit;
+    }
+
+    .newsletter-form button {
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+      border: none;
+      padding: 0 1rem;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+    }
+
+    /* Auth Modal */
+    .modal-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal-container.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-container.active .modal {
+      transform: translateY(0);
+    }
+
+    .modal-tabs {
+      display: flex;
+    }
+
+    .modal-tab {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      background-color: #f5f5f5;
+    }
+
+    .modal-tab.active {
+      background-color: white;
+      border-bottom: 3px solid var(--secondary-color);
+    }
+
+    .modal-content {
+      padding: 2rem;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin: 1.5rem 0;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .success-container {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .success-icon {
+      display: inline-flex;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: rgba(76, 175, 80, 0.1);
+      color: var(--success-color);
+      font-size: 2rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .success-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-message {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Dashboard */
+    .dashboard-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dashboard-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .dashboard-tabs {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .dashboard-tab {
+      color: rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+      padding: 0.5rem 0;
+      cursor: pointer;
+    }
+
+    .dashboard-tab.active {
+      color: white;
+      border-bottom: 2px solid var(--accent-color);
+    }
+
+    .dashboard-user {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .dashboard-container {
+      padding: 2rem;
+    }
+
+    .welcome-section {
       margin-bottom: 2rem;
     }
 
-    .progress-header select {
-      padding: 0.5rem 1rem;
-      border: 1px solid #ddd;
-      border-radius: var(--border-radius);
-    }
-
-    .chart-container {
-      width: 100%;
-      height: 400px;
-      margin-bottom: 2rem;
-    }
-
-    .stats-grid {
+    .stats-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       margin-bottom: 2rem;
     }
 
-    .stat-card {
+    .stat-card-light {
       background-color: var(--light-color);
-      padding: 1.5rem;
       border-radius: var(--border-radius);
-      text-align: center;
+      padding: 1rem;
     }
 
-    .stat-card h4 {
-      color: var(--text-light);
-      font-weight: 500;
+    .stat-card-light .stat-label {
       font-size: 0.9rem;
+      color: var(--text-light);
       margin-bottom: 0.5rem;
     }
 
-    .stat-card p {
+    .stat-card-light .stat-value {
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--primary-color);
     }
 
-    .log-workout-form {
-      background-color: var(--light-color);
-      padding: 1.5rem;
-      border-radius: var(--border-radius);
+    .progress-bar {
+      height: 8px;
+      background-color: #e5e5e5;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+      overflow: hidden;
     }
 
-    /* Support Center */
-    .support-container {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
+    .progress-bar .progress {
+      height: 100%;
+      background-color: var(--secondary-color);
+      border-radius: 4px;
     }
 
-    .faq-container {
+    .chart-container {
       background-color: white;
+      border: 1px solid #e5e5e5;
       border-radius: var(--border-radius);
-      padding: 2rem;
-      box-shadow: var(--box-shadow);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
     }
 
-    .faq-item {
-      border-bottom: 1px solid #eee;
-      padding: 1rem 0;
-    }
-
-    .faq-question {
+    .chart-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      cursor: pointer;
-      font-weight: 500;
-    }
-
-    .faq-answer {
-      padding-top: 1rem;
-      display: none;
-      color: var(--text-light);
-    }
-
-    .faq-item.active .faq-answer {
-      display: block;
-    }
-
-    .chat-container {
-      background-color: white;
-      border-radius: var(--border-radius);
-      padding: 2rem;
-      box-shadow: var(--box-shadow);
-      display: flex;
-      flex-direction: column;
-      height: 600px;
-    }
-
-    .chat-messages {
-      flex-grow: 1;
-      overflow-y: auto;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
       margin-bottom: 1rem;
-      background-color: #f9f9f9;
-      border-radius: var(--border-radius);
     }
 
-    .chat-message {
-      max-width: 80%;
-      padding: 1rem;
-      border-radius: var(--border-radius);
-    }
-
-    .chat-message.user {
-      align-self: flex-end;
-      background-color: var(--secondary-color);
-      color: white;
-    }
-
-    .chat-message.assistant {
-      align-self: flex-start;
-      background-color: var(--light-color);
-      color: var(--text-color);
-    }
-
-    .chat-form {
+    .chart-legend {
       display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
       gap: 0.5rem;
     }
 
-    .chat-form input {
-      flex-grow: 1;
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-      border-radius: var(--border-radius);
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
     }
 
-    /* Signup Section */
-    .signup-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      align-items: start;
-    }
-
-    .signup-form {
+    .upcoming-workouts {
       background-color: white;
-      padding: 2rem;
+      border: 1px solid #e5e5e5;
       border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
+      padding: 1.5rem;
     }
 
-    .login-link {
-      text-align: center;
-      margin-top: 1.5rem;
-    }
-
-    .signup-benefits {
-      padding: 2rem;
-      background-color: var(--light-color);
-      border-radius: var(--border-radius);
-      position: sticky;
-      top: 6rem;
-    }
-
-    .benefit {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .benefit i {
-      color: var(--secondary-color);
-      font-size: 1.5rem;
-      min-width: 28px;
-    }
-
-    .benefit-content h4 {
-      margin-bottom: 0.3rem;
-    }
-
-    .benefit-content p {
-      color: var(--text-light);
-    }
-
-    /* Video Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1100;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 20px;
-    }
-
-    .modal-content {
-      background-color: white;
-      margin: 5% auto;
-      padding: 20px;
-      border-radius: var(--border-radius);
-      max-width: 800px;
-      width: 90%;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      position: relative;
-    }
-
-    .close-modal {
-      position: absolute;
-      right: 20px;
-      top: 15px;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #999;
-    }
-
-    .close-modal:hover {
-      color: var(--danger-color);
-    }
-
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      height: 0;
-      overflow: hidden;
+    .workout-list {
       margin-top: 1rem;
     }
 
-    .video-container img, .video-container video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      object-fit: cover;
+    .workout-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(226, 243, 245, 0.5);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
     }
 
-    .demo-controls {
+    .workout-info {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .workout-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--border-radius);
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
+      align-items: center;
+      font-size: 1.2rem;
     }
 
-    /* Tabs */
-    .tabs {
-      display: flex;
-      border-bottom: 1px solid #ddd;
-      margin-bottom: 1.5rem;
-    }
-
-    .tab {
-      padding: 0.75rem 1.5rem;
-      cursor: pointer;
-      position: relative;
-      font-weight: 500;
-    }
-
-    .tab.active {
+    .workout-icon.strength {
+      background-color: rgba(61, 90, 241, 0.1);
       color: var(--secondary-color);
     }
 
-    .tab.active:after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background-color: var(--secondary-color);
+    .workout-icon.cardio {
+      background-color: rgba(34, 209, 238, 0.1);
+      color: var(--accent-color);
     }
 
-    .tab-content {
-      display: none;
+    .workout-icon.recovery {
+      background-color: rgba(14, 21, 58, 0.1);
+      color: var(--primary-color);
     }
 
-    .tab-content.active {
-      display: block;
+    .workout-details h4 {
+      margin-bottom: 0.2rem;
+      font-size: 1rem;
     }
 
-    /* Responsive Design */
-    @media (max-width: 992px) {
-      .routine-container,
-      .signup-container,
-      .support-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .signup-benefits {
-        position: static;
-      }
+    .workout-details p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 0;
     }
 
+    .workout-start {
+      color: var(--secondary-color);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .workout-start:hover {
+      color: var(--primary-color);
+    }
+
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 1rem;
+      .hero h2 {
+        font-size: 2rem;
       }
 
-      header nav {
-        margin-top: 1rem;
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .stat-card .number {
+        font-size: 2rem;
+      }
+
+      .modal {
+        width: 90%;
+      }
+
+      .dashboard-tabs {
+        display: none;
+      }
+
+      .stats-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem;
       }
 
       .hero {
         padding: 4rem 1rem;
       }
 
-      .hero h2 {
-        font-size: 2rem;
-      }
-
-      section {
-        padding: 3rem 1rem;
-      }
-
-      .radio-group {
+      .hero-buttons {
         flex-direction: column;
-        gap: 0.5rem;
       }
-    }
 
-    @media (max-width: 576px) {
-      .exercise-card {
-        max-width: 100%;
+      .stats-cards {
+        grid-template-columns: 1fr;
       }
-    }
-
-    /* Animation */
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-
-    /* Loading Spinner */
-    .loading-spinner {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(0, 0, 0, 0.1);
-      border-radius: 50%;
-      border-top-color: var(--secondary-color);
-      animation: spin 1s ease-in-out infinite;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .loading-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin: 2rem 0;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1><i class="fas fa-dumbbell"></i> FitFlow Gym</h1>
+    <h1>FitFlow</h1>
     <nav>
-      <a href="#home">Home</a>
+      <a href="#home" class="active">Home</a>
       <a href="#exercises">Exercises</a>
-      <a href="#routine">Routine Checker</a>
-      <a href="#progress">Progress</a>
-      <a href="#support">Support</a>
-      <a href="#signup">Sign Up</a>
+      <a href="#plans">Plans</a>
+      <a href="#calculators">Calculators</a>
+      <a href="#" class="btn primary" id="loginBtn">Log In</a>
     </nav>
   </header>
 
-  <section id="home">
-    <div class="hero">
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
       <div class="hero-content">
-        <h2>Advanced Fitness Training with AI</h2>
-        <p>100+ exercises, AI-generated tutorials, and personalized tracking for both men and women.</p>
+        <h2>Transform Your Fitness Journey</h2>
+        <p>Track your progress, discover personalized workouts, and achieve your fitness goals with our AI-powered platform.</p>
+        
         <div class="hero-buttons">
-          <a href="#exercises" class="btn primary">Explore Exercises</a>
-          <a href="#signup" class="btn secondary">Join Now</a>
+          <button class="btn primary" id="signupBtn">Start Your Journey</button>
+          <a href="#exercises" class="btn secondary">Explore Exercises <i class="fas fa-arrow-right"></i></a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="categories">
-    <h2>Specialized Workout Categories</h2>
-    <p>Choose from our comprehensive selection of workouts designed for all body types and fitness goals.</p>
-    
-    <div class="category-grid">
-      <div class="category-card">
-        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Strength Training">
-        <h3>Strength Training</h3>
-        <p>Build muscle and increase your strength with our comprehensive programs.</p>
-        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
-      </div>
-      
-      <div class="category-card">
-        <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Cardio Training">
-        <h3>Cardio Training</h3>
-        <p>Improve your endurance and heart health with effective cardio workouts.</p>
-        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
-      </div>
-      
-      <div class="category-card">
-        <img src="https://images.unsplash.com/photo-1616803689943-5601631c7fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Core & Belly Fat">
-        <h3>Core & Belly Fat</h3>
-        <p>Target your core muscles and reduce belly fat with specialized exercises.</p>
-        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
-      </div>
-      
-      <div class="category-card">
-        <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Home Workouts">
-        <h3>Home Workouts</h3>
-        <p>No equipment? No problem. Effective workouts you can do from anywhere.</p>
-        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
-      </div>
-      
-      <div class="category-card">
-        <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Gym Equipment">
-        <h3>Gym Equipment</h3>
-        <p>Master dumbbells, treadmills, and other gym machines for optimal results.</p>
-        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
-      </div>
-      
-      <div class="category-card">
-        <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Lower Body">
-        <h3>Lower Body</h3>
-        <p>Focus on legs, glutes and calves with our targeted lower body routines.</p>
-        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
-      </div>
-      
-      <div class="category-card">
-        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Upper Body">
-        <h3>Upper Body</h3>
-        <p>Develop your arms, chest, shoulders and back with these specialized workouts.</p>
-        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
-      </div>
-      
-      <div class="category-card">
-        <img src="https://images.unsplash.com/photo-1518310383802-640c2de311b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Flexibility">
-        <h3>Flexibility</h3>
-        <p>Improve your range of motion and prevent injuries with these stretching routines.</p>
-        <a href="#" class="text-link">View Workouts <i class="fas fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <section id="exercises">
-    <h2>🏋️ Exercise Library</h2>
-    <p>Over 100 exercises with AI-generated 3D demonstrations for perfect form</p>
-    
-    <div class="filter-container">
-      <div class="search-container">
-        <input type="text" id="exerciseSearch" placeholder="Search exercises...">
-        <button id="searchButton" class="btn primary">Search</button>
-      </div>
-      
-      <div class="filter-buttons">
-        <button class="filter-btn active" data-category="all">All</button>
-        <button class="filter-btn" data-category="gym">Gym</button>
-        <button class="filter-btn" data-category="home">Home</button>
-        <button class="filter-btn" data-category="core">Core</button>
-      </div>
-      
-      <div class="tag-filters">
-        <span>Target:</span>
-        <button class="tag-filter" data-target="upper">Upper Body</button>
-        <button class="tag-filter" data-target="lower">Lower Body</button>
-        <button class="tag-filter" data-target="core">Core</button>
-        <button class="tag-filter" data-target="full">Full Body</button>
-      </div>
-      
-      <div class="tag-filters">
-        <span>Equipment:</span>
-        <button class="tag-filter" data-equipment="none">No Equipment</button>
-        <button class="tag-filter" data-equipment="dumbbell">Dumbbells</button>
-        <button class="tag-filter" data-equipment="barbell">Barbell</button>
-        <button class="tag-filter" data-equipment="machine">Machines</button>
-        <button class="tag-filter" data-equipment="resistance">Resistance</button>
-      </div>
-      
-      <div class="tag-filters">
-        <span>Gender Focus:</span>
-        <button class="tag-filter" data-gender="male">Male</button>
-        <button class="tag-filter" data-gender="female">Female</button>
-        <button class="tag-filter" data-gender="both">Both</button>
-      </div>
-    </div>
-    
-    <div class="exercises-grid" id="exercisesGrid">
-      <!-- Exercise cards will be added dynamically with JavaScript -->
-    </div>
-    
-    <div class="pagination" id="exercisePagination">
-      <!-- Pagination will be generated dynamically -->
-    </div>
-    
-    <div class="text-center">
-      <a href="#" class="btn secondary">View All Exercises <i class="fas fa-arrow-right"></i></a>
-    </div>
-  </section>
-
-  <section id="stats">
-    <div class="stat">
-      <i class="fas fa-users"></i>
-      <h3>25,000+</h3>
-      <p>Active Members</p>
-    </div>
-    <div class="stat">
-      <i class="fas fa-dumbbell"></i>
-      <h3>100+</h3>
-      <p>Exercise Guides</p>
-    </div>
-    <div class="stat">
-      <i class="fas fa-person-running"></i>
-      <h3>350+</h3>
-      <p>Workout Plans</p>
-    </div>
-    <div class="stat">
-      <i class="fas fa-star"></i>
-      <h3>4.9/5</h3>
-      <p>Average Rating</p>
-    </div>
-  </section>
-
-  <section id="routine">
-    <div class="routine-container">
-      <div class="routine-info">
-        <i class="fas fa-calendar-check"></i>
-        <h2>🗓️ AI Routine Generator</h2>
-        <p>Our advanced AI creates personalized workout routines based on your fitness goals, experience level, and available equipment.</p>
-        <div class="testimonial">
-          <p>"The AI routine generator is amazing! It created a perfect routine that helped me lose 18 pounds in just two months!"</p>
-          <span>- Sarah J.</span>
-        </div>
-      </div>
-      
-      <div class="routine-form">
-        <h3>Generate Your Personalized Routine</h3>
-        <p>Tell us what you're looking for and our AI will create the perfect workout plan.</p>
         
-        <form id="routineForm">
-          <div class="form-group">
-            <label for="routineGoal">What's your primary fitness goal?</label>
-            <select id="routineGoal" required>
-              <option value="" disabled selected>Select your goal</option>
-              <option value="belly">Lose Belly Fat</option>
-              <option value="muscle">Build Muscle</option>
-              <option value="strength">Increase Strength</option>
-              <option value="cardio">Improve Cardio</option>
-              <option value="toning">Body Toning</option>
-              <option value="endurance">Increase Endurance</option>
-              <option value="flexibility">Improve Flexibility</option>
-            </select>
+        <div class="stats-grid" style="margin-top: 3rem;">
+          <div class="stat-card">
+            <div class="number">100+</div>
+            <div class="label">Exercises</div>
           </div>
-          
-          <div class="form-group">
-            <label>Where do you prefer to work out?</label>
-            <div class="radio-group">
-              <label>
-                <input type="radio" name="location" value="gym" required>
-                Gym
-              </label>
-              <label>
-                <input type="radio" name="location" value="home">
-                Home
-              </label>
-              <label>
-                <input type="radio" name="location" value="both">
-                Both
-              </label>
+          <div class="stat-card">
+            <div class="number">50K+</div>
+            <div class="label">Active Users</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">30+</div>
+            <div class="label">Workout Plans</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">4.8</div>
+            <div class="label">User Rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Preview Section -->
+    <section id="dashboard-preview">
+      <h2>Your Personal Fitness Dashboard</h2>
+      <p>Track your progress, manage your workouts, and stay motivated with our comprehensive dashboard designed to help you reach your fitness goals.</p>
+      
+      <div class="dashboard-container" style="max-width: 1000px; margin: 0 auto; background-color: #f5f5f5; border-radius: var(--border-radius); padding: 1rem; box-shadow: var(--box-shadow);">
+        <div style="background-color: white; border-radius: var(--border-radius); overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+          <!-- Dashboard Nav -->
+          <div class="dashboard-header">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div class="dashboard-title">FitFlow Dashboard</div>
+              <div class="dashboard-tabs">
+                <div class="dashboard-tab active">Overview</div>
+                <div class="dashboard-tab">Workouts</div>
+                <div class="dashboard-tab">Progress</div>
+                <div class="dashboard-tab">Nutrition</div>
+              </div>
+            </div>
+            <div class="dashboard-user">
+              <i class="fas fa-bell" style="color: rgba(255, 255, 255, 0.7);"></i>
+              <div class="user-avatar">JD</div>
             </div>
           </div>
           
-          <div class="form-group">
-            <label>Your gender</label>
-            <div class="radio-group">
-              <label>
-                <input type="radio" name="gender" value="male" required>
-                Male
-              </label>
-              <label>
-                <input type="radio" name="gender" value="female">
-                Female
-              </label>
-              <label>
-                <input type="radio" name="gender" value="other">
-                Other
-              </label>
+          <!-- Dashboard Content -->
+          <div class="dashboard-container">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+              <h3>Welcome back, John!</h3>
+              <p style="color: var(--text-light);">You're making great progress. Keep it up!</p>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-cards">
+              <div class="stat-card-light">
+                <div class="stat-label">Weekly Workouts</div>
+                <div class="stat-value">4 / 5</div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 80%;"></div>
+                </div>
+              </div>
+              <div class="stat-card-light">
+                <div class="stat-label">Calories Burned</div>
+                <div class="stat-value">1,240</div>
+                <div style="color: var(--success-color); font-size: 0.8rem; display: flex; align-items: center; margin-top: 0.5rem;">
+                  <i class="fas fa-arrow-up" style="margin-right: 0.3rem;"></i> 15% from last week
+                </div>
+              </div>
+              <div class="stat-card-light">
+                <div class="stat-label">Active Minutes</div>
+                <div class="stat-value">346</div>
+                <div style="color: var(--success-color); font-size: 0.8rem; display: flex; align-items: center; margin-top: 0.5rem;">
+                  <i class="fas fa-arrow-up" style="margin-right: 0.3rem;"></i> 8% from last week
+                </div>
+              </div>
+              <div class="stat-card-light">
+                <div class="stat-label">Workout Streak</div>
+                <div class="stat-value">12 days</div>
+                <div style="display: flex; gap: 0.25rem; margin-top: 0.5rem;">
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: var(--secondary-color);"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #e5e5e5;"></div>
+                  <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #e5e5e5;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Progress Chart -->
+            <div class="chart-container">
+              <div class="chart-header">
+                <h4 style="margin-bottom: 0;">Your Fitness Progress</h4>
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--secondary-color);"></div>
+                    <span>Weight</span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-color" style="background-color: var(--accent-color);"></div>
+                    <span>Strength</span>
+                  </div>
+                </div>
+              </div>
+              <canvas id="progressChart" height="250"></canvas>
+            </div>
+            
+            <!-- Upcoming Workouts -->
+            <div class="upcoming-workouts">
+              <h4>Upcoming Workouts</h4>
+              <div class="workout-list">
+                <div class="workout-item">
+                  <div class="workout-info">
+                    <div class="workout-icon strength">
+                      <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <div class="workout-details">
+                      <h4>Upper Body Strength</h4>
+                      <p>Today • 5:30 PM • 45 min</p>
+                    </div>
+                  </div>
+                  <div class="workout-start">
+                    <i class="fas fa-play-circle"></i>
+                  </div>
+                </div>
+                
+                <div class="workout-item">
+                  <div class="workout-info">
+                    <div class="workout-icon cardio">
+                      <i class="fas fa-running"></i>
+                    </div>
+                    <div class="workout-details">
+                      <h4>HIIT Cardio</h4>
+                      <p>Tomorrow • 6:00 AM • 30 min</p>
+                    </div>
+                  </div>
+                  <div class="workout-start">
+                    <i class="fas fa-play-circle"></i>
+                  </div>
+                </div>
+                
+                <div class="workout-item">
+                  <div class="workout-info">
+                    <div class="workout-icon recovery">
+                      <i class="fas fa-yoga"></i>
+                    </div>
+                    <div class="workout-details">
+                      <h4>Recovery Yoga</h4>
+                      <p>Wed, May 15 • 7:00 PM • 60 min</p>
+                    </div>
+                  </div>
+                  <div class="workout-start">
+                    <i class="fas fa-play-circle"></i>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          
-          <div class="form-group">
-            <label>Your experience level</label>
-            <div class="radio-group">
-              <label>
-                <input type="radio" name="experience" value="beginner" required>
-                Beginner
-              </label>
-              <label>
-                <input type="radio" name="experience" value="intermediate">
-                Intermediate
-              </label>
-              <label>
-                <input type="radio" name="experience" value="advanced">
-                Advanced
-              </label>
-            </div>
-          </div>
-          
-          <button type="submit" class="btn primary">Generate Routine</button>
-        </form>
-        
-        <div id="routineResult" class="hidden">
-          <h4>Your Personalized Routine</h4>
-          <ul id="recommendationsList"></ul>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="progress">
-    <h2>📊 Track Your Progress</h2>
-    <p>Monitor your fitness journey with detailed analytics and reporting</p>
-    
-    <div class="progress-container">
-      <div class="progress-header">
-        <h3>Progress Overview</h3>
-        <select id="timeRangeSelect">
-          <option value="week">Last Week</option>
-          <option value="month" selected>Last Month</option>
-          <option value="3months">Last 3 Months</option>
-          <option value="year">Last Year</option>
-        </select>
-      </div>
+    <!-- Exercises Section -->
+    <section id="exercises" class="bg-light">
+      <h2>Exercise Library</h2>
+      <p>Browse through our extensive collection of exercises, complete with AI-generated tutorials, form guides, and workout integration.</p>
       
-      <div class="chart-container">
-        <canvas id="progressChart"></canvas>
-      </div>
-      
-      <div class="stats-grid">
-        <div class="stat-card">
-          <h4>Training Frequency</h4>
-          <p>3.5 days/week</p>
+      <div class="filter-container">
+        <div class="search-container">
+          <input type="text" placeholder="Search exercises..." id="exerciseSearch">
+          <button class="btn primary">
+            <i class="fas fa-search"></i>
+          </button>
         </div>
-        <div class="stat-card">
-          <h4>Weight Change</h4>
-          <p>-2.5 kg</p>
+        
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-category="all">All</button>
+          <button class="filter-btn" data-category="strength">Strength</button>
+          <button class="filter-btn" data-category="cardio">Cardio</button>
+          <button class="filter-btn" data-category="flexibility">Flexibility</button>
+          <button class="filter-btn" data-category="core">Core</button>
         </div>
-        <div class="stat-card">
-          <h4>Strength Increase</h4>
-          <p>+15%</p>
-        </div>
-        <div class="stat-card">
-          <h4>Streak</h4>
-          <p>6 weeks</p>
+        
+        <div class="tag-filters">
+          <button class="tag-filter" data-tag="gym">Gym</button>
+          <button class="tag-filter" data-tag="home">Home</button>
+          <button class="tag-filter" data-tag="upper">Upper Body</button>
+          <button class="tag-filter" data-tag="lower">Lower Body</button>
+          <button class="tag-filter" data-tag="core">Core</button>
+          <button class="tag-filter" data-tag="beginner">Beginner</button>
+          <button class="tag-filter" data-tag="intermediate">Intermediate</button>
+          <button class="tag-filter" data-tag="advanced">Advanced</button>
         </div>
       </div>
       
-      <h3>Log Your Workout</h3>
-      <div class="log-workout-form">
-        <form id="logWorkoutForm">
-          <div class="form-group">
-            <label for="workoutDate">Date</label>
-            <input type="date" id="workoutDate" required>
+      <div class="exercises-grid">
+        <!-- Exercise Card 1 -->
+        <div class="exercise-card" data-category="strength" data-tags="gym upper intermediate">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Bench Press">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Strength</div>
           </div>
-          
-          <div class="form-group">
-            <label for="workoutType">Workout Type</label>
-            <select id="workoutType" required>
-              <option value="" disabled selected>Select workout type</option>
-              <option value="strength">Strength Training</option>
-              <option value="cardio">Cardio</option>
-              <option value="hiit">HIIT</option>
-              <option value="flexibility">Flexibility</option>
-              <option value="other">Other</option>
-            </select>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Bench Press</h3>
+            </div>
+            <p>A compound exercise that targets the chest, shoulders, and triceps. Perfect for building upper body strength.</p>
+            <div class="exercise-tags">
+              <span class="tag small upper">Chest</span>
+              <span class="tag small gym">Gym</span>
+              <span class="tag small">Intermediate</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=rT7DgCr-3pg" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
           </div>
-          
-          <div class="form-group">
-            <label for="workoutDuration">Duration (minutes)</label>
-            <input type="number" id="workoutDuration" min="1" required>
+        </div>
+        
+        <!-- Exercise Card 2 -->
+        <div class="exercise-card" data-category="strength" data-tags="gym lower intermediate">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Barbell Squat">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Strength</div>
           </div>
-          
-          <div class="form-group">
-            <label for="workoutIntensity">Intensity</label>
-            <select id="workoutIntensity" required>
-              <option value="" disabled selected>Select intensity</option>
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="max">Maximum</option>
-            </select>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Barbell Squat</h3>
+            </div>
+            <p>The king of leg exercises. Builds strength and size in your quadriceps, hamstrings, and glutes.</p>
+            <div class="exercise-tags">
+              <span class="tag small lower">Legs</span>
+              <span class="tag small gym">Gym</span>
+              <span class="tag small">Intermediate</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=ultWZbUMPL8" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
           </div>
-          
-          <div class="form-group">
-            <label for="currentWeight">Current Weight (kg)</label>
-            <input type="number" id="currentWeight" step="0.1" min="1">
+        </div>
+        
+        <!-- Exercise Card 3 -->
+        <div class="exercise-card" data-category="core" data-tags="home core beginner">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1566241440091-ec10de8db2e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Plank">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Core</div>
           </div>
-          
-          <div class="form-group">
-            <label for="workoutNotes">Notes</label>
-            <textarea id="workoutNotes" rows="3"></textarea>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Plank</h3>
+            </div>
+            <p>An isometric core exercise that strengthens your abdominals, lower back, and shoulders.</p>
+            <div class="exercise-tags">
+              <span class="tag small core">Core</span>
+              <span class="tag small home">Home</span>
+              <span class="tag small">Beginner</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=pSHjTRCQxIw" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
           </div>
-          
-          <button type="submit" class="btn primary">Log Workout</button>
-        </form>
+        </div>
+        
+        <!-- Exercise Card 4 -->
+        <div class="exercise-card" data-category="strength" data-tags="home upper beginner">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1616803689943-5601631c7fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Push-Up">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Strength</div>
+          </div>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Push-Up</h3>
+            </div>
+            <p>A classic bodyweight exercise that works your chest, triceps, and shoulders while engaging your core.</p>
+            <div class="exercise-tags">
+              <span class="tag small upper">Chest</span>
+              <span class="tag small home">Home</span>
+              <span class="tag small">Beginner</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=IODxDxX7oi4" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Exercise Card 5 -->
+        <div class="exercise-card" data-category="strength" data-tags="gym lower advanced">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Deadlift">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Strength</div>
+          </div>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Deadlift</h3>
+            </div>
+            <p>A compound movement that targets your entire posterior chain, including your back, glutes, and hamstrings.</p>
+            <div class="exercise-tags">
+              <span class="tag small lower">Back</span>
+              <span class="tag small gym">Gym</span>
+              <span class="tag small">Advanced</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=ytGaGIn3SjE" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Exercise Card 6 -->
+        <div class="exercise-card" data-category="cardio" data-tags="home core intermediate">
+          <div class="exercise-image">
+            <img src="https://images.unsplash.com/photo-1599058917765-a780eda07a3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Burpees">
+            <div class="tag primary" style="position: absolute; top: 1rem; right: 1rem;">Cardio</div>
+          </div>
+          <div class="exercise-content">
+            <div class="exercise-header">
+              <h3>Burpees</h3>
+            </div>
+            <p>A full-body exercise that combines a push-up, squat, and jump for maximum cardio and strength benefits.</p>
+            <div class="exercise-tags">
+              <span class="tag small core">Full Body</span>
+              <span class="tag small home">Home</span>
+              <span class="tag small">Intermediate</span>
+            </div>
+            <div class="exercise-footer">
+              <a href="https://www.youtube.com/watch?v=dZgVxmf6jkA" target="_blank" class="text-link">
+                <i class="fas fa-play-circle"></i> Watch Tutorial
+              </a>
+              <button class="btn secondary small save-exercise">
+                <i class="far fa-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+      
+      <div class="text-center">
+        <button class="btn secondary" id="loadMoreExercises">
+          Load More Exercises <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+    </section>
 
-  <section id="testimonials">
-    <h2>What Our Members Say</h2>
-    <p>Real results from real people who transformed their fitness with FitFlow Gym.</p>
-    
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-header">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Jessica R.">
-          <div>
-            <h4>Jessica R.</h4>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-        </div>
-        <p>"The AI-generated tutorials are game-changing! The 3D demonstrations helped me perfect my form in ways video tutorials never could. I've seen incredible results in just 2 months."</p>
-      </div>
+    <!-- Workout Plans Section -->
+    <section id="plans">
+      <h2>Workout Plans</h2>
+      <p>Find the perfect workout plan tailored to your fitness level, goals, and available equipment. From beginners to advanced athletes, we have something for everyone.</p>
       
-      <div class="testimonial-card">
-        <div class="testimonial-header">
-          <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Michael T.">
-          <div>
-            <h4>Michael T.</h4>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-            </div>
+      <div class="category-grid">
+        <!-- Plan Card 1 -->
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1579126038374-6064e9370f0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Fitness Foundations">
+          <div class="tag" style="position: absolute; top: 1rem; left: 1rem;">BEGINNER</div>
+          <div style="padding: 1.5rem;">
+            <h3>Fitness Foundations</h3>
+            <p>Perfect for beginners looking to build a solid fitness foundation with basic exercises and proper form.</p>
+            
+            <ul style="list-style: none; margin: 1.5rem 0;">
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>3 workouts per week</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>30-45 minutes per session</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Minimal equipment needed</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Form guidance and tutorials</span>
+              </li>
+            </ul>
+            
+            <button class="btn primary" style="width: 100%;" id="planSignupBtn">Start This Plan</button>
           </div>
         </div>
-        <p>"As someone who travels a lot, having 100+ exercises with different equipment options has been a lifesaver. The progress tracking keeps me accountable even on the road."</p>
-      </div>
-      
-      <div class="testimonial-card">
-        <div class="testimonial-header">
-          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Alyssa K.">
-          <div>
-            <h4>Alyssa K.</h4>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
+        
+        <!-- Plan Card 2 -->
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Strength & Conditioning">
+          <div class="tag" style="position: absolute; top: 1rem; left: 1rem;">INTERMEDIATE</div>
+          <div class="tag" style="position: absolute; top: 1rem; right: 1rem; background-color: var(--secondary-color); color: white;">POPULAR</div>
+          <div style="padding: 1.5rem;">
+            <h3>Strength & Conditioning</h3>
+            <p>Challenge yourself with progressive overload and varied workouts to build muscle and improve conditioning.</p>
+            
+            <ul style="list-style: none; margin: 1.5rem 0;">
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>4-5 workouts per week</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>45-60 minutes per session</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Mix of gym and home workouts</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Progressive overload tracking</span>
+              </li>
+            </ul>
+            
+            <button class="btn primary" style="width: 100%;" id="planSignupBtn2">Start This Plan</button>
           </div>
         </div>
-        <p>"The AI support center is incredible. It's like having a personal trainer available 24/7. My questions are answered instantly with personalized advice that actually works for my body type."</p>
-      </div>
-      
-      <div class="testimonial-card">
-        <div class="testimonial-header">
-          <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="David L.">
-          <div>
-            <h4>David L.</h4>
-            <div class="stars">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
+        
+        <!-- Plan Card 3 -->
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" alt="Elite Performance">
+          <div class="tag" style="position: absolute; top: 1rem; left: 1rem;">ADVANCED</div>
+          <div style="padding: 1.5rem;">
+            <h3>Elite Performance</h3>
+            <p>Intensive training program designed for experienced athletes looking to maximize strength and performance.</p>
+            
+            <ul style="list-style: none; margin: 1.5rem 0;">
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>5-6 workouts per week</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>60-90 minutes per session</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Periodization and split routines</span>
+              </li>
+              <li style="display: flex; gap: 0.5rem;">
+                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                <span>Advanced recovery techniques</span>
+              </li>
+            </ul>
+            
+            <button class="btn primary" style="width: 100%;" id="planSignupBtn3">Start This Plan</button>
           </div>
         </div>
-        <p>"I've tried many fitness apps but the reporting features on FitFlow Gym are unmatched. Being able to see my training frequency and weight changes keeps me motivated to stay consistent."</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="support">
-    <h2>🤝 AI Support Center</h2>
-    <p>Get instant answers and personalized advice from our AI fitness assistant</p>
-    
-    <div class="support-container">
-      <div class="faq-container">
-        <h3>Frequently Asked Questions</h3>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>How often should I work out each week?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>For beginners, 3-4 days per week is optimal. Intermediate and advanced exercisers can train 4-6 days per week. Always include at least 1-2 rest days to allow your body to recover.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>How long before I see results?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Most people begin to feel differences in energy and strength within 2 weeks. Visible physical changes typically appear within 4-8 weeks, depending on your consistency, intensity, nutrition, and individual factors.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>Should I do cardio or weight training first?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>It depends on your primary goal. If building strength is your main focus, do weight training first when your energy is highest. If cardiovascular fitness or weight loss is your priority, you might prefer cardio first. You can also split them into separate sessions entirely.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>How can I reduce belly fat specifically?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>You cannot spot-reduce fat from specific areas. The best approach is a combination of caloric deficit through nutrition, regular cardio exercise, and full-body strength training. Core-specific exercises will strengthen the muscles but won't directly burn the fat covering them.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item">
-          <div class="faq-question">
-            <span>What should I eat before and after workouts?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Before workouts, aim for easily digestible carbs and some protein 1-3 hours prior (e.g., banana and yogurt, toast with egg). After workouts, consume protein and carbs within 45 minutes to support recovery (e.g., protein shake with fruit, chicken and rice).</p>
-          </div>
-        </div>
-      </div>
+    <!-- Calculators Section -->
+    <section id="calculators" class="bg-light">
+      <h2>Fitness Calculators</h2>
+      <p>Use our scientifically-backed calculators to track your fitness metrics, set realistic goals, and monitor your progress over time.</p>
       
-      <div class="chat-container">
-        <h3>AI Fitness Assistant</h3>
-        <div class="chat-messages" id="chatMessages">
-          <div class="chat-message assistant">
-            <p>Hello! I'm your AI fitness assistant. Ask me any fitness, nutrition, or workout questions, and I'll provide personalized advice to help you reach your goals.</p>
+      <div class="calculator-container">
+        <div class="calculator-tabs">
+          <div class="calculator-tab active" data-tab="bmi">
+            <i class="fas fa-weight"></i> BMI Calculator
+          </div>
+          <div class="calculator-tab" data-tab="tdee">
+            <i class="fas fa-fire-alt"></i> TDEE Calculator
+          </div>
+          <div class="calculator-tab" data-tab="1rm">
+            <i class="fas fa-dumbbell"></i> 1RM Calculator
+          </div>
+          <div class="calculator-tab" data-tab="bodyfat">
+            <i class="fas fa-percentage"></i> Body Fat
           </div>
         </div>
         
-        <form id="chatForm" class="chat-form">
-          <input type="text" id="chatInput" placeholder="Ask a fitness question..." required>
-          <button type="submit" class="btn primary"><i class="fas fa-paper-plane"></i></button>
-        </form>
+        <div class="calculator-content">
+          <!-- BMI Calculator -->
+          <div class="calculator-pane active" id="bmi-calculator">
+            <h3>BMI (Body Mass Index) Calculator</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+              <div>
+                <div class="form-group">
+                  <label for="height">Height</label>
+                  <div class="input-group">
+                    <input type="number" id="height" value="175" min="50" max="250">
+                    <select id="height-unit">
+                      <option value="cm">cm</option>
+                      <option value="in">in</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="weight">Weight</label>
+                  <div class="input-group">
+                    <input type="number" id="weight" value="70" min="20" max="300">
+                    <select id="weight-unit">
+                      <option value="kg">kg</option>
+                      <option value="lb">lb</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="age">Age</label>
+                  <input type="number" id="age" value="30" min="18" max="100" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+                </div>
+                
+                <div class="form-group">
+                  <label>Gender</label>
+                  <div class="radio-group">
+                    <div class="radio-item">
+                      <input type="radio" id="male" name="gender" value="male" checked>
+                      <label for="male">Male</label>
+                    </div>
+                    <div class="radio-item">
+                      <input type="radio" id="female" name="gender" value="female">
+                      <label for="female">Female</label>
+                    </div>
+                  </div>
+                </div>
+                
+                <button class="btn primary" style="width: 100%;" id="calculate-bmi">Calculate BMI</button>
+              </div>
+              
+              <div class="result-container">
+                <h4>Your Results</h4>
+                
+                <div class="result-circle">
+                  <div class="result-number" id="bmi-result">--</div>
+                  <div class="result-label">BMI</div>
+                </div>
+                
+                <div class="result-category" id="bmi-category">Calculate to see results</div>
+                
+                <div class="category-list">
+                  <h5>BMI Categories</h5>
+                  <div class="category-item" id="underweight">
+                    <span>Underweight</span>
+                    <span>Below 18.5</span>
+                  </div>
+                  <div class="category-item" id="normal">
+                    <span>Normal weight</span>
+                    <span>18.5 - 24.9</span>
+                  </div>
+                  <div class="category-item" id="overweight">
+                    <span>Overweight</span>
+                    <span>25 - 29.9</span>
+                  </div>
+                  <div class="category-item" id="obese">
+                    <span>Obesity</span>
+                    <span>30 or greater</span>
+                  </div>
+                </div>
+                
+                <div style="font-size: 0.8rem; color: var(--text-light); font-style: italic;">
+                  Note: BMI is a general indicator and doesn't account for muscle mass, body composition, or other individual factors.
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- TDEE Calculator -->
+          <div class="calculator-pane" id="tdee-calculator">
+            <h3>TDEE (Total Daily Energy Expenditure) Calculator</h3>
+            <p style="text-align: center; margin: 2rem 0;">This calculator is coming soon! Check back for updates.</p>
+          </div>
+          
+          <!-- 1RM Calculator -->
+          <div class="calculator-pane" id="1rm-calculator">
+            <h3>1RM (One Rep Max) Calculator</h3>
+            <p style="text-align: center; margin: 2rem 0;">This calculator is coming soon! Check back for updates.</p>
+          </div>
+          
+          <!-- Body Fat Calculator -->
+          <div class="calculator-pane" id="bodyfat-calculator">
+            <h3>Body Fat Percentage Calculator</h3>
+            <p style="text-align: center; margin: 2rem 0;">This calculator is coming soon! Check back for updates.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="signup">
-    <div class="signup-container">
-      <div class="signup-form">
-        <h2>🔐 Create Your FitFlow Account</h2>
-        <p>Join thousands of members who have transformed their fitness journey with FitFlow Gym.</p>
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+      <h2>Success Stories</h2>
+      <p>Hear from our community about how FitFlow has transformed their fitness journeys.</p>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">
+            "FitFlow has completely changed my approach to fitness. The personalized workout plans and progress tracking have helped me lose 30 pounds and gain muscle definition I never thought I'd have!"
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Sarah Johnson">
+            <div>
+              <div class="testimonial-name">Sarah Johnson</div>
+              <div class="testimonial-title">FitFlow Member - 8 months</div>
+            </div>
+          </div>
+        </div>
         
-        <form id="signupForm">
-          <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" placeholder="John Doe" required>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">
+            "As a busy professional, I never found time for consistent workouts. The FitFlow app's reminders, short workout options, and exercise tutorials made it easy to stay committed even with my hectic schedule."
           </div>
-          
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="johndoe123" required>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="David Chen">
+            <div>
+              <div class="testimonial-name">David Chen</div>
+              <div class="testimonial-title">FitFlow Member - 1 year</div>
+            </div>
           </div>
-          
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="john@example.com" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="••••••••" required>
-            <p class="form-hint">Must be at least 8 characters with 1 number and 1 special character</p>
-          </div>
-          
-          <div class="form-group">
-            <label>Your primary fitness goal</label>
-            <select id="fitnessGoal" required>
-              <option value="" disabled selected>Select your goal</option>
-              <option value="weightLoss">Weight Loss</option>
-              <option value="muscleGain">Muscle Gain</option>
-              <option value="toning">Body Toning</option>
-              <option value="strength">Strength Training</option>
-              <option value="endurance">Endurance</option>
-              <option value="flexibility">Flexibility</option>
-            </select>
-          </div>
-          
-          <div class="form-check">
-            <input type="checkbox" id="terms" required>
-            <label for="terms">
-              I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-            </label>
-          </div>
-          
-          <button type="submit" class="btn primary">Create Account</button>
-        </form>
+        </div>
         
-        <p class="login-link">
-          Already have an account? <a href="#">Log In</a>
-        </p>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">
+            "The workout plans are fantastic, but what really sets FitFlow apart is the supportive community. I've connected with others who share my fitness goals, and we motivate each other every day!"
+          </div>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" alt="Emily Rodriguez">
+            <div>
+              <div class="testimonial-name">Emily Rodriguez</div>
+              <div class="testimonial-title">FitFlow Member - 6 months</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta">
+      <h2>Why Choose FitFlow?</h2>
+      <p>Our platform offers everything you need to transform your fitness journey and achieve long-lasting results.</p>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="feature-title">Progress Tracking</div>
+          <div class="feature-description">Track your workouts, measurements, and fitness achievements with detailed analytics.</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <div class="feature-title">Personalized Plans</div>
+          <div class="feature-description">Get workout and nutrition plans tailored to your fitness level, goals, and preferences.</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <div class="feature-title">Video Tutorials</div>
+          <div class="feature-description">Learn proper form with our library of HD video tutorials for every exercise.</div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="feature-title">Community Support</div>
+          <div class="feature-description">Connect with like-minded fitness enthusiasts and share your journey.</div>
+        </div>
       </div>
       
-      <div class="signup-benefits">
-        <h3>Why Join FitFlow Gym?</h3>
-        
-        <div class="benefit">
-          <i class="fas fa-check-circle"></i>
-          <div class="benefit-content">
-            <h4>AI-Generated Exercise Tutorials</h4>
-            <p>Learn perfect form with our 3D demonstrations powered by artificial intelligence.</p>
-          </div>
-        </div>
-        
-        <div class="benefit">
-          <i class="fas fa-check-circle"></i>
-          <div class="benefit-content">
-            <h4>100+ Exercises for All Body Types</h4>
-            <p>Access our library of exercises designed for both men and women of all fitness levels.</p>
-          </div>
-        </div>
-        
-        <div class="benefit">
-          <i class="fas fa-check-circle"></i>
-          <div class="benefit-content">
-            <h4>Advanced Progress Tracking</h4>
-            <p>Monitor training frequency, weight changes, and strength improvements over time.</p>
-          </div>
-        </div>
-        
-        <div class="benefit">
-          <i class="fas fa-check-circle"></i>
-          <div class="benefit-content">
-            <h4>AI Fitness Support</h4>
-            <p>Get 24/7 answers from our intelligent assistant for personalized guidance.</p>
-          </div>
-        </div>
-        
-        <div class="benefit">
-          <i class="fas fa-check-circle"></i>
-          <div class="benefit-content">
-            <h4>Custom Workout Routines</h4>
-            <p>Receive AI-generated workout plans tailored to your specific goals and needs.</p>
-          </div>
-        </div>
+      <div style="text-align: center;">
+        <button class="btn primary" id="ctaSignupBtn">Start Your Fitness Journey Today</button>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; <span id="currentYear">2023</span> FitFlow Gym. All rights reserved.</p>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">FitFlow</div>
+        <p>Your all-in-one fitness platform for personalized workouts, progress tracking, and expert guidance.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#exercises">Exercises</a></li>
+          <li><a href="#plans">Workout Plans</a></li>
+          <li><a href="#calculators">Calculators</a></li>
+          <li><a href="#" id="footerLoginBtn">Dashboard</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="footer-heading">Support</h3>
+        <ul class="footer-links">
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="footer-heading">Subscribe</h3>
+        <p>Stay updated with the latest fitness tips and features.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email">
+          <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-copyright">
+      <p>© 2025 FitFlow. All rights reserved. Designed with ❤️ for fitness enthusiasts.</p>
+    </div>
   </footer>
 
-  <!-- Demo Video Modal -->
-  <div id="demoModal" class="modal">
-    <div class="modal-content">
-      <span class="close-modal">&times;</span>
-      <h3 id="demoTitle">Exercise Demonstration</h3>
-      <div class="video-container">
-        <video id="demoVideo" autoplay loop muted playsinline>
-          <source src="" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+  <!-- Auth Modal -->
+  <div class="modal-container" id="authModal">
+    <div class="modal">
+      <div class="modal-tabs">
+        <div class="modal-tab active" data-tab="login">Log In</div>
+        <div class="modal-tab" data-tab="signup">Sign Up</div>
       </div>
-      <div class="demo-description" id="demoDescription">
-        <h4>Instructions:</h4>
-        <p>Loading instructions...</p>
+      
+      <!-- Login Form -->
+      <div class="modal-content active" id="login-content">
+        <h3 class="modal-title">Welcome Back</h3>
+        
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="your@email.com" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="••••••••" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <div class="form-footer">
+            <div class="remember-me">
+              <input type="checkbox" id="remember-me">
+              <label for="remember-me">Remember me</label>
+            </div>
+            <a href="#" style="font-size: 0.9rem;">Forgot password?</a>
+          </div>
+          
+          <button type="submit" class="btn primary" style="width: 100%;">Log In</button>
+        </form>
       </div>
-      <div class="demo-controls">
-        <button id="prevView" class="btn secondary"><i class="fas fa-arrow-left"></i> Previous View</button>
-        <button id="pausePlay" class="btn primary"><i class="fas fa-pause"></i> Pause</button> 
-        <button id="nextView" class="btn secondary">Next View <i class="fas fa-arrow-right"></i></button>
+      
+      <!-- Signup Form -->
+      <div class="modal-content" id="signup-content">
+        <h3 class="modal-title">Create Your Account</h3>
+        
+        <form id="signup-form">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label for="first-name">First Name</label>
+              <input type="text" id="first-name" placeholder="John" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+            </div>
+            
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" placeholder="Doe" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" placeholder="your@email.com" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" placeholder="••••••••" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="••••••••" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: var(--border-radius); font-family: inherit; font-size: 1rem;">
+          </div>
+          
+          <button type="submit" class="btn primary" style="width: 100%;">Create Account</button>
+        </form>
+      </div>
+      
+      <!-- Success Message -->
+      <div class="success-container hidden" id="success-message">
+        <div class="success-icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <h3 class="success-title">Account Created!</h3>
+        <p class="success-message">Your account has been created successfully. You can now access your personalized dashboard.</p>
+        <button class="btn primary" id="success-continue">Continue to Dashboard</button>
       </div>
     </div>
   </div>
 
   <script>
-    // Database of 100+ exercises
-    const exercisesDatabase = [
-      // Home Exercises - Men and Women
-      {
-        id: 1,
-        name: "Push-ups",
-        category: "home",
-        targetGroup: "upper",
-        equipment: "none",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Perfect for building upper body strength. Targets chest, shoulders, and triceps.",
-        image_url: "https://images.unsplash.com/photo-1598971639058-fab30a9a7409?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1598971639058-fab30a9a7409?auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1616803689943-5601631c7fec?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Begin in a plank position with hands shoulder-width apart\n2. Lower your body by bending your elbows\n3. Keep your back straight and core engaged\n4. Push back up to starting position\n5. Aim for 3 sets of 10-15 reps"
-      },
-      {
-        id: 2,
-        name: "Squats",
-        category: "home",
-        targetGroup: "lower",
-        equipment: "none",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "The king of leg exercises. Builds strength in quads, hamstrings, and glutes.",
-        image_url: "https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Stand with feet shoulder-width apart\n2. Bend knees and hips to lower your body\n3. Keep your back straight and chest up\n4. Lower until thighs are parallel to the ground or as far as comfortable\n5. Push through heels to return to standing\n6. Aim for 3 sets of 15-20 reps"
-      },
-      {
-        id: 3,
-        name: "Plank",
-        category: "home",
-        targetGroup: "core",
-        equipment: "none",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Excellent for core stability and strength. Engages abs, lower back, and shoulders.",
-        image_url: "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Begin in a forearm plank position with elbows under shoulders\n2. Keep your body in a straight line from head to heels\n3. Engage your core and don't let your hips sag\n4. Hold for 30-60 seconds\n5. Aim for 3 sets"
-      },
-      {
-        id: 4,
-        name: "Lunges",
-        category: "home",
-        targetGroup: "lower",
-        equipment: "none",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Great for leg strength and balance. Works quads, hamstrings, and glutes.",
-        image_url: "https://images.unsplash.com/photo-1593476123561-9516f2097158?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1593476123561-9516f2097158?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Stand with feet hip-width apart\n2. Step forward with one leg and lower your body\n3. Both knees should bend to 90 degrees\n4. Push through front heel to return to starting position\n5. Alternate legs\n6. Aim for 3 sets of 10-12 reps per leg"
-      },
-      {
-        id: 5,
-        name: "Backward Lunges",
-        category: "home",
-        targetGroup: "lower",
-        equipment: "none",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Variation of lunges that puts less stress on the knees. Great for balance and lower body strength.",
-        image_url: "https://images.unsplash.com/photo-1434682881908-b43d0467b798?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1434682881908-b43d0467b798?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Stand with feet hip-width apart\n2. Step backward with one leg and lower your body\n3. Both knees should bend to 90 degrees\n4. Push through front heel to return to starting position\n5. Alternate legs\n6. Aim for 3 sets of 10-12 reps per leg"
-      },
-      {
-        id: 6,
-        name: "Mountain Climbers",
-        category: "home",
-        targetGroup: "core",
-        equipment: "none",
-        difficulty: "intermediate",
-        genderFocus: "both",
-        description: "Dynamic exercise that burns calories and strengthens core. Great for cardio too.",
-        image_url: "https://images.unsplash.com/photo-1571019613914-85f342c6a11e?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1571019613914-85f342c6a11e?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Begin in a high plank position\n2. Drive one knee toward your chest\n3. Quickly switch legs in a running motion\n4. Keep your core engaged and hips level\n5. Aim for 3 sets of 30 seconds"
-      },
-      {
-        id: 7,
-        name: "Ab Wheel Rollout",
-        category: "home",
-        targetGroup: "core",
-        equipment: "ab wheel",
-        difficulty: "advanced",
-        genderFocus: "both",
-        description: "Challenging core exercise that targets deep abdominal muscles, shoulders, and back.",
-        image_url: "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Kneel on the floor with the ab wheel in front of you\n2. Hold the ab wheel with both hands\n3. Slowly roll the wheel forward, extending your body\n4. Keep your core tight and don't let your back sag\n5. Roll back to the starting position\n6. Aim for 3 sets of 5-10 reps"
-      },
-      {
-        id: 8,
-        name: "Arm Circles",
-        category: "home",
-        targetGroup: "upper",
-        equipment: "none",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Simple exercise that targets shoulders and improves mobility. Great as a warm-up.",
-        image_url: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Stand with feet shoulder-width apart\n2. Extend arms straight out to the sides\n3. Make small circles with your arms\n4. Do forward circles for 30 seconds\n5. Do backward circles for 30 seconds\n6. Aim for 3 sets"
-      },
-      {
-        id: 9,
-        name: "Chest Dips",
-        category: "home",
-        targetGroup: "upper",
-        equipment: "dip bars or sturdy chairs",
-        difficulty: "intermediate",
-        genderFocus: "both",
-        description: "Effective exercise for chest, triceps, and shoulders. Can be done at home with two sturdy chairs.",
-        image_url: "https://images.unsplash.com/photo-1598266663439-2056e6900339?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1598266663439-2056e6900339?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Position yourself between two sturdy chairs or dip bars\n2. Support your weight on your arms with elbows straight\n3. Lower your body by bending your elbows\n4. Keep your chest leaning forward slightly\n5. Push back up to the starting position\n6. Aim for 3 sets of 8-12 reps"
-      },
-      {
-        id: 10,
-        name: "Punches",
-        category: "home",
-        targetGroup: "upper",
-        equipment: "none",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Boxing-inspired cardio exercise that works the arms, shoulders, and core while burning calories.",
-        image_url: "https://images.unsplash.com/photo-1517438322307-e67111335449?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1517438322307-e67111335449?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Stand with feet shoulder-width apart\n2. Bring fists up to chin level\n3. Extend one arm forward in a punching motion\n4. Return to starting position and punch with the other arm\n5. Keep your core engaged and maintain good posture\n6. Aim for 3 sets of 1 minute each"
-      },
-      
-      // Gym Exercises with Equipment
-      {
-        id: 11,
-        name: "Deadlifts",
-        category: "gym",
-        targetGroup: "full",
-        equipment: "barbell",
-        difficulty: "intermediate",
-        genderFocus: "both",
-        description: "Full-body exercise that builds serious strength in back, legs, and core.",
-        image_url: "https://images.unsplash.com/photo-1603287681836-b174ce5074c2?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1603287681836-b174ce5074c2?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Stand with feet hip-width apart, barbell over mid-foot\n2. Bend at hips and knees to grip the bar\n3. Keep back flat, chest up, and core engaged\n4. Push through heels and stand up with the weight\n5. Return the weight to the floor with controlled movement\n6. Aim for 3-5 sets of 5-8 reps"
-      },
-      {
-        id: 12,
-        name: "Bench Press",
-        category: "gym",
-        targetGroup: "upper",
-        equipment: "barbell",
-        difficulty: "intermediate",
-        genderFocus: "both",
-        description: "Classic chest exercise that builds upper body strength and mass.",
-        image_url: "https://images.unsplash.com/photo-1534368786749-d60f3bbc2992?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1534368786749-d60f3bbc2992?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Lie on a bench with feet flat on the floor\n2. Grip the bar slightly wider than shoulder-width\n3. Lower the bar to your chest with control\n4. Press the bar back up until arms are extended\n5. Keep wrists stacked over elbows throughout\n6. Aim for 3-4 sets of 8-12 reps"
-      },
-      {
-        id: 13,
-        name: "Lat Pulldown",
-        category: "gym",
-        targetGroup: "upper",
-        equipment: "machine",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Machine exercise that targets the back, particularly the latissimus dorsi muscles.",
-        image_url: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Sit at the lat pulldown machine with thighs secured\n2. Grip the bar wider than shoulder-width\n3. Pull the bar down to your upper chest\n4. Squeeze your back muscles at the bottom\n5. Slowly return the bar to the starting position\n6. Aim for 3 sets of 10-12 reps"
-      },
-      {
-        id: 14,
-        name: "Leg Press",
-        category: "gym",
-        targetGroup: "lower",
-        equipment: "machine",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Machine exercise that targets the quadriceps, hamstrings, and glutes with less stress on the back.",
-        image_url: "https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Sit in the leg press machine with back against the pad\n2. Place feet shoulder-width apart on the platform\n3. Lower the platform by bending your knees\n4. Push through your heels to extend legs\n5. Don't lock your knees at the top\n6. Aim for 3 sets of 10-15 reps"
-      },
-      {
-        id: 15,
-        name: "Dumbbell Bicep Curls",
-        category: "gym",
-        targetGroup: "upper",
-        equipment: "dumbbell",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Isolation exercise that targets the biceps. Great for building arm definition.",
-        image_url: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Stand with feet shoulder-width apart, dumbbells in hand\n2. Keep elbows close to your sides\n3. Curl the weights up toward your shoulders\n4. Slowly lower the weights back down\n5. Keep your wrists straight throughout\n6. Aim for 3 sets of 10-12 reps"
-      },
-      {
-        id: 16,
-        name: "Treadmill Running",
-        category: "gym",
-        targetGroup: "full",
-        equipment: "machine",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Cardio exercise that burns calories, improves heart health, and builds endurance.",
-        image_url: "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Start with a 5-minute warm-up walk\n2. Gradually increase speed to a comfortable run\n3. Maintain good posture with shoulders relaxed\n4. Keep a steady pace for 20-30 minutes\n5. Finish with a 5-minute cool-down walk\n6. For beginners, try intervals of walking and running"
-      },
-      {
-        id: 17,
-        name: "Leg Curl",
-        category: "gym",
-        targetGroup: "lower",
-        equipment: "machine",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Machine exercise that isolates and strengthens the hamstrings.",
-        image_url: "https://images.unsplash.com/photo-1603287681361-687263553677?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1603287681361-687263553677?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Lie face down on the leg curl machine\n2. Position the pad against your lower calves\n3. Curl your legs up by bending your knees\n4. Squeeze your hamstrings at the top\n5. Slowly lower your legs back down\n6. Aim for 3 sets of 12-15 reps"
-      },
-      {
-        id: 18,
-        name: "Dumbbell Shoulder Press",
-        category: "gym",
-        targetGroup: "upper",
-        equipment: "dumbbell",
-        difficulty: "intermediate",
-        genderFocus: "both",
-        description: "Effective exercise for building shoulder strength and stability.",
-        image_url: "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Sit on a bench with back support\n2. Hold dumbbells at shoulder height\n3. Press the weights up over your head\n4. Keep your core engaged and back straight\n5. Lower the weights back to shoulder height\n6. Aim for 3 sets of 8-12 reps"
-      },
-      {
-        id: 19,
-        name: "Cable Row",
-        category: "gym",
-        targetGroup: "upper",
-        equipment: "machine",
-        difficulty: "intermediate",
-        genderFocus: "both",
-        description: "Great exercise for building back thickness and improving posture.",
-        image_url: "https://images.unsplash.com/photo-1616803689943-5601631c7fec?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1616803689943-5601631c7fec?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Sit at the cable row machine with feet on the platform\n2. Grasp the handle with both hands\n3. Keep your back straight and chest up\n4. Pull the handle toward your lower ribs\n5. Squeeze your shoulder blades together\n6. Return to starting position with control\n7. Aim for 3 sets of 10-12 reps"
-      },
-      {
-        id: 20,
-        name: "Forearm Curl",
-        category: "gym",
-        targetGroup: "upper",
-        equipment: "dumbbell",
-        difficulty: "beginner",
-        genderFocus: "both",
-        description: "Isolation exercise that specifically targets the forearms for improved grip strength.",
-        image_url: "https://images.unsplash.com/photo-1590507621108-433608c97823?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1590507621108-433608c97823?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Sit on a bench with forearms resting on your thighs\n2. Hold a dumbbell with your palm facing up\n3. Lower the weight by extending your wrist\n4. Curl the weight up by flexing your wrist\n5. Keep your forearm stationary throughout\n6. Aim for 3 sets of 15-20 reps"
-      },
-      
-      // Core Exercises
-      {
-        id: 21,
-        name: "Russian Twists",
-        category: "core",
-        targetGroup: "core",
-        equipment: "none",
-        difficulty: "intermediate",
-        genderFocus: "both",
-        description: "Effective exercise for building rotational core strength and targeting obliques.",
-        image_url: "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Sit on the floor with knees bent\n2. Lean back slightly, keeping your back straight\n3. Lift feet slightly off the ground (for beginners, keep feet on the ground)\n4. Clasp hands together or hold a weight\n5. Twist your torso to the right, then to the left\n6. Aim for 3 sets of 15-20 twists per side"
-      },
-      {
-        id: 22,
-        name: "Bicycle Crunches",
-        category: "core",
-        targetGroup: "core",
-        equipment: "none",
-        difficulty: "intermediate",
-        genderFocus: "both",
-        description: "Dynamic exercise that targets the rectus abdominis and obliques simultaneously.",
-        image_url: "https://images.unsplash.com/photo-1600881333268-1a004806b093?auto=format&fit=crop&w=800&h=600",
-        demoViews: [
-          "https://images.unsplash.com/photo-1600881333268-1a004806b093?auto=format&fit=crop&w=800&h=600"
-        ],
-        instructions: "1. Lie on your back with hands behind your head\n2. Lift shoulders and upper back off the ground\n3. Bring one knee to your chest while extending the other leg\n4. Twist your torso to bring opposite elbow to knee\n5. Switch sides in a pedaling motion\n6. Aim for 3 sets of 15-20 reps per side"
-      }
-    ];
-
-    // Add 80 more exercises programmatically for a total of 100+ exercises
-    // This would be a mix of variations and additional exercises to cover all requested categories
-    for (let i = 23; i <= 102; i++) {
-      // Create variations of existing exercises with different equipment, difficulty, etc.
-      const baseExercise = exercisesDatabase[Math.floor(Math.random() * 22)];
-      const categories = ["home", "gym", "core"];
-      const targetGroups = ["upper", "lower", "core", "full"];
-      const equipment = ["none", "dumbbell", "barbell", "machine", "resistance", "ab wheel"];
-      const difficulties = ["beginner", "intermediate", "advanced"];
-      const genderFocus = ["male", "female", "both"];
-      
-      // Create new exercise based on existing ones but with variations
-      const newExercise = {
-        id: i,
-        name: `${["Advanced", "Modified", "Alternative", "Dynamic", "Static"][Math.floor(Math.random() * 5)]} ${baseExercise.name}`,
-        category: categories[Math.floor(Math.random() * categories.length)],
-        targetGroup: targetGroups[Math.floor(Math.random() * targetGroups.length)],
-        equipment: equipment[Math.floor(Math.random() * equipment.length)],
-        difficulty: difficulties[Math.floor(Math.random() * difficulties.length)],
-        genderFocus: genderFocus[Math.floor(Math.random() * genderFocus.length)],
-        description: `Variation of ${baseExercise.name} that focuses on ${["intensity", "form", "tempo", "range of motion", "muscle activation"][Math.floor(Math.random() * 5)]}.`,
-        image_url: baseExercise.image_url,
-        demoViews: baseExercise.demoViews,
-        instructions: baseExercise.instructions
-      };
-      
-      exercisesDatabase.push(newExercise);
-    }
-
-    // Sample routines data - these would be generated by AI in real-time
-    const routinesData = {
-      "belly": {
-        "both": {
-          "beginner": [
-            "Planks - 3 sets of 30-60 seconds",
-            "Mountain Climbers - 3 sets of 20 reps",
-            "Russian Twists - 3 sets of 15 reps each side",
-            "30 minutes of cardio 3-4 times per week",
-            "Incorporate a calorie deficit diet for best results"
-          ]
-        }
-      },
-      "muscle": {
-        "gym": {
-          "intermediate": [
-            "Bench Press - 4 sets of 8-12 reps",
-            "Squats - 4 sets of 8-12 reps",
-            "Deadlifts - 3 sets of 8-10 reps",
-            "Pull-ups - 3 sets to failure",
-            "Ensure adequate protein intake (1.6-2g per kg of bodyweight)"
-          ]
-        }
-      },
-      "strength": {
-        "gym": {
-          "advanced": [
-            "Deadlifts - 5 sets of 5 reps",
-            "Squats - 5 sets of 5 reps",
-            "Bench Press - 5 sets of 5 reps",
-            "Overhead Press - 5 sets of 5 reps",
-            "Rest 2-3 minutes between sets for optimal strength gains"
-          ]
-        }
-      },
-      "cardio": {
-        "both": {
-          "beginner": [
-            "30-45 minute jogging sessions 3-4 times per week",
-            "HIIT workouts - 30 seconds work, 30 seconds rest for 15-20 minutes",
-            "Cycling - 30-60 minutes at moderate intensity",
-            "Jump rope - 3 sets of 2 minutes",
-            "Swimming - 30 minutes of laps 2-3 times per week"
-          ]
-        }
-      },
-      "home": {
-        "home": {
-          "beginner": [
-            "Push-ups - 3 sets of 10-15 reps",
-            "Bodyweight Squats - 3 sets of 15-20 reps",
-            "Lunges - 3 sets of 10 reps each leg",
-            "Plank - 3 sets of 30-60 seconds",
-            "Jumping Jacks - 3 sets of 30 seconds"
-          ]
-        }
-      }
-    };
-
-    // Set current year in the footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-    // Exercise filter and display functionality
+    // Chart.js - Progress Chart
     document.addEventListener('DOMContentLoaded', function() {
-      const exercisesGrid = document.getElementById('exercisesGrid');
+      const ctx = document.getElementById('progressChart').getContext('2d');
+      const progressChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+          datasets: [
+            {
+              label: 'Weight (kg)',
+              data: [82, 81, 80.5, 79.8, 79, 78.5, 77.8, 77],
+              borderColor: '#3d5af1',
+              backgroundColor: 'rgba(61, 90, 241, 0.1)',
+              tension: 0.4,
+              fill: true
+            },
+            {
+              label: 'Strength (1RM)',
+              data: [65, 67.5, 70, 72.5, 75, 77.5, 80, 82.5],
+              borderColor: '#22d1ee',
+              backgroundColor: 'rgba(34, 209, 238, 0.1)',
+              tension: 0.4,
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false
+            }
+          }
+        }
+      });
+      
+      // Filter exercise cards
       const filterButtons = document.querySelectorAll('.filter-btn');
       const tagFilters = document.querySelectorAll('.tag-filter');
-      const searchInput = document.getElementById('exerciseSearch');
-      const searchButton = document.getElementById('searchButton');
-      const paginationContainer = document.getElementById('exercisePagination');
+      const exerciseCards = document.querySelectorAll('.exercise-card');
+      const exerciseSearch = document.getElementById('exerciseSearch');
       
-      // State variables
-      let currentPage = 1;
-      const itemsPerPage = 6;
-      let filteredExercises = [...exercisesDatabase];
-      let activeFilters = {
-        category: 'all',
-        target: null,
-        equipment: null,
-        gender: null
-      };
+      let activeCategory = 'all';
+      let activeTags = [];
       
-      // Display exercises with pagination
-      function displayExercises() {
-        // Clear grid
-        exercisesGrid.innerHTML = '';
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          activeCategory = button.dataset.category;
+          
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          filterExercises();
+        });
+      });
+      
+      tagFilters.forEach(tag => {
+        tag.addEventListener('click', () => {
+          const tagValue = tag.dataset.tag;
+          
+          if (activeTags.includes(tagValue)) {
+            activeTags = activeTags.filter(t => t !== tagValue);
+            tag.classList.remove('active');
+          } else {
+            activeTags.push(tagValue);
+            tag.classList.add('active');
+          }
+          
+          filterExercises();
+        });
+      });
+      
+      exerciseSearch.addEventListener('input', filterExercises);
+      
+      function filterExercises() {
+        const searchTerm = exerciseSearch.value.toLowerCase();
         
-        // Get current page items
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const currentExercises = filteredExercises.slice(startIndex, endIndex);
+        exerciseCards.forEach(card => {
+          const cardCategory = card.dataset.category;
+          const cardTags = card.dataset.tags.split(' ');
+          const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+          const cardDesc = card.querySelector('p').textContent.toLowerCase();
+          
+          // Check if card matches category filter
+          const matchesCategory = activeCategory === 'all' || cardCategory === activeCategory;
+          
+          // Check if card matches tag filters
+          const matchesTags = activeTags.length === 0 || activeTags.every(tag => cardTags.includes(tag));
+          
+          // Check if card matches search term
+          const matchesSearch = searchTerm === '' || 
+            cardTitle.includes(searchTerm) || 
+            cardDesc.includes(searchTerm);
+          
+          if (matchesCategory && matchesTags && matchesSearch) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+      
+      // BMI Calculator
+      const calculateBmiBtn = document.getElementById('calculate-bmi');
+      
+      calculateBmiBtn.addEventListener('click', () => {
+        const height = parseFloat(document.getElementById('height').value);
+        const weight = parseFloat(document.getElementById('weight').value);
+        const heightUnit = document.getElementById('height-unit').value;
+        const weightUnit = document.getElementById('weight-unit').value;
         
-        if (currentExercises.length === 0) {
-          exercisesGrid.innerHTML = '<p class="no-results">No exercises found matching your criteria. Try different filters.</p>';
-          paginationContainer.innerHTML = '';
+        let heightInMeters;
+        let weightInKg;
+        
+        // Convert height to meters
+        if (heightUnit === 'cm') {
+          heightInMeters = height / 100;
+        } else {
+          // Inches to meters
+          heightInMeters = height * 0.0254;
+        }
+        
+        // Convert weight to kg
+        if (weightUnit === 'kg') {
+          weightInKg = weight;
+        } else {
+          // Pounds to kg
+          weightInKg = weight * 0.453592;
+        }
+        
+        // Calculate BMI
+        const bmi = weightInKg / (heightInMeters * heightInMeters);
+        const bmiResult = document.getElementById('bmi-result');
+        const bmiCategory = document.getElementById('bmi-category');
+        
+        // Update UI
+        bmiResult.textContent = bmi.toFixed(1);
+        
+        // Reset category classes
+        document.querySelectorAll('.category-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Set category and highlight appropriate row
+        if (bmi < 18.5) {
+          bmiCategory.textContent = 'Underweight';
+          bmiCategory.style.color = '#ff9800';
+          document.getElementById('underweight').classList.add('active');
+        } else if (bmi >= 18.5 && bmi < 25) {
+          bmiCategory.textContent = 'Normal Weight';
+          bmiCategory.style.color = '#4caf50';
+          document.getElementById('normal').classList.add('active');
+        } else if (bmi >= 25 && bmi < 30) {
+          bmiCategory.textContent = 'Overweight';
+          bmiCategory.style.color = '#ff9800';
+          document.getElementById('overweight').classList.add('active');
+        } else {
+          bmiCategory.textContent = 'Obesity';
+          bmiCategory.style.color = '#f44336';
+          document.getElementById('obese').classList.add('active');
+        }
+      });
+      
+      // Calculator Tabs
+      const calculatorTabs = document.querySelectorAll('.calculator-tab');
+      const calculatorPanes = document.querySelectorAll('.calculator-pane');
+      
+      calculatorTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const tabId = tab.dataset.tab;
+          
+          // Remove active class from all tabs and panes
+          calculatorTabs.forEach(t => t.classList.remove('active'));
+          calculatorPanes.forEach(p => p.classList.remove('active'));
+          
+          // Add active class to current tab and pane
+          tab.classList.add('active');
+          document.getElementById(`${tabId}-calculator`).classList.add('active');
+        });
+      });
+      
+      // Auth Modal
+      const authModal = document.getElementById('authModal');
+      const loginBtn = document.getElementById('loginBtn');
+      const signupBtn = document.getElementById('signupBtn');
+      const planSignupBtn = document.getElementById('planSignupBtn');
+      const planSignupBtn2 = document.getElementById('planSignupBtn2');
+      const planSignupBtn3 = document.getElementById('planSignupBtn3');
+      const ctaSignupBtn = document.getElementById('ctaSignupBtn');
+      const footerLoginBtn = document.getElementById('footerLoginBtn');
+      const modalTabs = document.querySelectorAll('.modal-tab');
+      const modalContents = document.querySelectorAll('.modal-content');
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const successMessage = document.getElementById('success-message');
+      const successContinue = document.getElementById('success-continue');
+      
+      // Open modal with login tab
+      loginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('login');
+      });
+      
+      footerLoginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('login');
+      });
+      
+      // Open modal with signup tab
+      signupBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      planSignupBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      planSignupBtn2.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      planSignupBtn3.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      ctaSignupBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('signup');
+      });
+      
+      // Close modal when clicking outside
+      authModal.addEventListener('click', (e) => {
+        if (e.target === authModal) {
+          closeModal();
+        }
+      });
+      
+      // Tab switching
+      modalTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const tabId = tab.dataset.tab;
+          
+          // Remove active class from all tabs and contents
+          modalTabs.forEach(t => t.classList.remove('active'));
+          modalContents.forEach(c => c.classList.remove('active'));
+          
+          // Add active class to current tab and content
+          tab.classList.add('active');
+          document.getElementById(`${tabId}-content`).classList.add('active');
+        });
+      });
+      
+      // Form submissions
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Normally we would send an API request here
+        // For demo purposes, just show a success message
+        showSuccessMessage('Welcome Back!', 'You have successfully logged in to your account.');
+      });
+      
+      signupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Validate passwords match
+        const password = document.getElementById('signup-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        
+        if (password !== confirmPassword) {
+          alert('Passwords do not match!');
           return;
         }
         
-        // Create exercise cards
-        currentExercises.forEach(exercise => {
-          const card = document.createElement('div');
-          card.className = 'exercise-card';
-          card.setAttribute('data-category', exercise.category);
-          
-          card.innerHTML = `
-            <div class="exercise-image">
-              <img src="${exercise.image_url}" alt="${exercise.name}">
-            </div>
-            <div class="exercise-content">
-              <div class="exercise-header">
-                <h3>${exercise.name}</h3>
-                <span class="tag ${exercise.category}">${exercise.category.charAt(0).toUpperCase() + exercise.category.slice(1)}</span>
-              </div>
-              <p>${exercise.description}</p>
-              <div class="exercise-tags">
-                <span class="tag small ${exercise.targetGroup}">${exercise.targetGroup.charAt(0).toUpperCase() + exercise.targetGroup.slice(1)}</span>
-                <span class="tag small">${exercise.difficulty.charAt(0).toUpperCase() + exercise.difficulty.slice(1)}</span>
-                <span class="tag small ${exercise.genderFocus}">${exercise.genderFocus.charAt(0).toUpperCase() + exercise.genderFocus.slice(1)}</span>
-              </div>
-              <div class="exercise-footer">
-                <span class="tag small">${exercise.equipment === 'none' ? 'No Equipment' : exercise.equipment.charAt(0).toUpperCase() + exercise.equipment.slice(1)}</span>
-                <button class="play-btn" data-exercise-id="${exercise.id}"><i class="fas fa-play-circle"></i></button>
-              </div>
-            </div>
-          `;
-          
-          exercisesGrid.appendChild(card);
-        });
-        
-        // Update pagination
-        updatePagination();
-      }
-      
-      // Filter exercises based on active filters
-      function filterExercises() {
-        filteredExercises = exercisesDatabase.filter(exercise => {
-          // Category filter
-          if (activeFilters.category !== 'all' && exercise.category !== activeFilters.category) {
-            return false;
-          }
-          
-          // Target group filter
-          if (activeFilters.target && exercise.targetGroup !== activeFilters.target) {
-            return false;
-          }
-          
-          // Equipment filter
-          if (activeFilters.equipment && exercise.equipment !== activeFilters.equipment) {
-            return false;
-          }
-          
-          // Gender filter
-          if (activeFilters.gender && exercise.genderFocus !== activeFilters.gender && exercise.genderFocus !== 'both') {
-            return false;
-          }
-          
-          // Search filter
-          if (searchInput.value.trim() !== '') {
-            const searchTerm = searchInput.value.toLowerCase();
-            return exercise.name.toLowerCase().includes(searchTerm) || 
-                   exercise.description.toLowerCase().includes(searchTerm);
-          }
-          
-          return true;
-        });
-        
-        // Reset to first page when filters change
-        currentPage = 1;
-        
-        // Display filtered exercises
-        displayExercises();
-      }
-      
-      // Update pagination controls
-      function updatePagination() {
-        const totalPages = Math.ceil(filteredExercises.length / itemsPerPage);
-        paginationContainer.innerHTML = '';
-        
-        // Don't show pagination if only one page
-        if (totalPages <= 1) return;
-        
-        // Previous button
-        const prevButton = document.createElement('button');
-        prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-        prevButton.disabled = currentPage === 1;
-        prevButton.addEventListener('click', () => {
-          if (currentPage > 1) {
-            currentPage--;
-            displayExercises();
-          }
-        });
-        paginationContainer.appendChild(prevButton);
-        
-        // Page buttons
-        const maxButtons = 5;
-        const startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
-        const endPage = Math.min(totalPages, startPage + maxButtons - 1);
-        
-        for (let i = startPage; i <= endPage; i++) {
-          const pageButton = document.createElement('button');
-          pageButton.textContent = i;
-          if (i === currentPage) {
-            pageButton.classList.add('active');
-          }
-          pageButton.addEventListener('click', () => {
-            currentPage = i;
-            displayExercises();
-          });
-          paginationContainer.appendChild(pageButton);
-        }
-        
-        // Next button
-        const nextButton = document.createElement('button');
-        nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        nextButton.disabled = currentPage === totalPages;
-        nextButton.addEventListener('click', () => {
-          if (currentPage < totalPages) {
-            currentPage++;
-            displayExercises();
-          }
-        });
-        paginationContainer.appendChild(nextButton);
-      }
-      
-      // Category filter buttons event listeners
-      filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          // Remove active class from all buttons
-          filterButtons.forEach(btn => btn.classList.remove('active'));
-          
-          // Add active class to clicked button
-          button.classList.add('active');
-          
-          // Update active filters
-          activeFilters.category = button.getAttribute('data-category');
-          
-          // Apply filters
-          filterExercises();
-        });
+        // Normally we would send an API request here
+        // For demo purposes, just show a success message
+        showSuccessMessage('Account Created!', 'Your account has been created successfully. You can now access your personalized dashboard.');
       });
       
-      // Tag filter buttons event listeners
-      tagFilters.forEach(button => {
-        button.addEventListener('click', () => {
-          // Toggle active class
-          button.classList.toggle('active');
-          
-          // Get filter type and value
-          const filterType = button.hasAttribute('data-target') ? 'target' : 
-                             button.hasAttribute('data-equipment') ? 'equipment' : 'gender';
-          
-          const filterValue = button.hasAttribute('data-target') ? button.getAttribute('data-target') : 
-                              button.hasAttribute('data-equipment') ? button.getAttribute('data-equipment') : 
-                              button.getAttribute('data-gender');
-          
-          // Update active filters
-          if (button.classList.contains('active')) {
-            // Clear other buttons in same category
-            tagFilters.forEach(btn => {
-              if (btn !== button && 
-                  ((filterType === 'target' && btn.hasAttribute('data-target')) || 
-                   (filterType === 'equipment' && btn.hasAttribute('data-equipment')) || 
-                   (filterType === 'gender' && btn.hasAttribute('data-gender')))) {
-                btn.classList.remove('active');
-              }
-            });
-            
-            activeFilters[filterType] = filterValue;
-          } else {
-            activeFilters[filterType] = null;
+      // Success continue button
+      successContinue.addEventListener('click', () => {
+        // Redirect to dashboard page
+        // For now, just close the modal
+        closeModal();
+        
+        // Scroll to dashboard preview
+        document.getElementById('dashboard-preview').scrollIntoView({ behavior: 'smooth' });
+      });
+      
+      // Helper functions
+      function openModal(tab) {
+        authModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Set active tab
+        modalTabs.forEach(t => {
+          if (t.dataset.tab === tab) {
+            t.click();
           }
-          
-          // Apply filters
-          filterExercises();
-        });
-      });
-      
-      // Search functionality
-      searchButton.addEventListener('click', () => {
-        filterExercises();
-      });
-      
-      searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          filterExercises();
-        }
-      });
-      
-      // Initial display
-      displayExercises();
-      
-      // AI Demo Modal functionality
-      const demoModal = document.getElementById('demoModal');
-      const demoVideo = document.getElementById('demoVideo');
-      const demoTitle = document.getElementById('demoTitle');
-      const demoDescription = document.getElementById('demoDescription');
-      const closeModal = document.querySelector('.close-modal');
-      const prevViewButton = document.getElementById('prevView');
-      const nextViewButton = document.getElementById('nextView');
-      const pausePlayButton = document.getElementById('pausePlay');
-      
-      let currentExercise = null;
-      let currentViewIndex = 0;
-      let isPlaying = true;
-      
-      // AI-generated video URLs for demonstrations (would be dynamically generated in production)
-      const aiGeneratedVideos = {
-        "push-ups": [
-          "https://storage.googleapis.com/fitflow-ai-demos/push-ups-front.mp4",
-          "https://storage.googleapis.com/fitflow-ai-demos/push-ups-side.mp4"
-        ],
-        "squats": [
-          "https://storage.googleapis.com/fitflow-ai-demos/squats-front.mp4",
-          "https://storage.googleapis.com/fitflow-ai-demos/squats-side.mp4"
-        ],
-        "planks": [
-          "https://storage.googleapis.com/fitflow-ai-demos/plank-side.mp4"
-        ],
-        "deadlifts": [
-          "https://storage.googleapis.com/fitflow-ai-demos/deadlift-side.mp4",
-          "https://storage.googleapis.com/fitflow-ai-demos/deadlift-front.mp4"
-        ],
-        "lunges": [
-          "https://storage.googleapis.com/fitflow-ai-demos/lunges-side.mp4",
-          "https://storage.googleapis.com/fitflow-ai-demos/lunges-front.mp4"
-        ],
-        "default": [
-          "https://storage.googleapis.com/fitflow-ai-demos/exercise-demo.mp4"
-        ]
-      };
-      
-      // Function to get AI video for an exercise
-      function getAiVideoUrls(exerciseName) {
-        const normalizedName = exerciseName.toLowerCase().replace(/\s+/g, '-');
-        
-        // Check if we have specific videos for this exercise
-        for (const key in aiGeneratedVideos) {
-          if (normalizedName.includes(key)) {
-            return aiGeneratedVideos[key];
-          }
-        }
-        
-        // Return default videos if no match found
-        return aiGeneratedVideos.default;
-      }
-      
-      // Handle click on play buttons
-      document.addEventListener('click', function(event) {
-        if (event.target.closest('.play-btn')) {
-          const playButton = event.target.closest('.play-btn');
-          const exerciseId = parseInt(playButton.getAttribute('data-exercise-id'));
-          
-          // Find the exercise
-          currentExercise = exercisesDatabase.find(ex => ex.id === exerciseId);
-          
-          if (currentExercise) {
-            // Reset view index and playing state
-            currentViewIndex = 0;
-            isPlaying = true;
-            
-            // Show first demo view
-            updateDemoView();
-            
-            // Show modal
-            demoModal.style.display = 'block';
-            
-            // Prevent scrolling on the body
-            document.body.style.overflow = 'hidden';
-            
-            // Update pause/play button
-            updatePausePlayButton();
-          }
-        }
-      });
-      
-      // Update the demo view
-      function updateDemoView() {
-        if (!currentExercise) return;
-        
-        // Set title
-        demoTitle.textContent = `${currentExercise.name} - AI Video Demonstration`;
-        
-        // Get AI-generated videos for this exercise
-        const videoUrls = getAiVideoUrls(currentExercise.name);
-        
-        // Set video source
-        const videoSource = demoVideo.querySelector('source');
-        videoSource.src = videoUrls[currentViewIndex];
-        
-        // Reload the video with the new source
-        demoVideo.load();
-        demoVideo.play();
-        
-        // Set description
-        demoDescription.innerHTML = `
-          <h4>Instructions:</h4>
-          <p>${currentExercise.instructions.replace(/\n/g, '<br>')}</p>
-        `;
-        
-        // Update buttons state
-        prevViewButton.disabled = currentViewIndex === 0;
-        nextViewButton.disabled = currentViewIndex >= (videoUrls.length - 1);
-      }
-      
-      // Previous view button
-      prevViewButton.addEventListener('click', function() {
-        const videoUrls = getAiVideoUrls(currentExercise.name);
-        if (currentViewIndex > 0) {
-          currentViewIndex--;
-          updateDemoView();
-        }
-      });
-      
-      // Next view button
-      nextViewButton.addEventListener('click', function() {
-        const videoUrls = getAiVideoUrls(currentExercise.name);
-        if (currentViewIndex < videoUrls.length - 1) {
-          currentViewIndex++;
-          updateDemoView();
-        }
-      });
-      
-      // Pause/Play button
-      pausePlayButton.addEventListener('click', function() {
-        if (isPlaying) {
-          demoVideo.pause();
-        } else {
-          demoVideo.play();
-        }
-        isPlaying = !isPlaying;
-        updatePausePlayButton();
-      });
-      
-      // Update pause/play button icon
-      function updatePausePlayButton() {
-        const icon = pausePlayButton.querySelector('i');
-        if (isPlaying) {
-          icon.className = 'fas fa-pause';
-          pausePlayButton.querySelector('i + text') && pausePlayButton.removeChild(pausePlayButton.querySelector('i + text'));
-          pausePlayButton.appendChild(document.createTextNode(' Pause'));
-        } else {
-          icon.className = 'fas fa-play';
-          pausePlayButton.querySelector('i + text') && pausePlayButton.removeChild(pausePlayButton.querySelector('i + text'));
-          pausePlayButton.appendChild(document.createTextNode(' Play'));
-        }
-      }
-      
-      // Close modal when clicking the close button
-      closeModal.addEventListener('click', function() {
-        closeVideoModal();
-      });
-      
-      // Close modal when clicking outside of the modal content
-      window.addEventListener('click', function(event) {
-        if (event.target === demoModal) {
-          closeVideoModal();
-        }
-      });
-      
-      // Close modal when pressing Escape key
-      window.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && demoModal.style.display === 'block') {
-          closeVideoModal();
-        }
-      });
-      
-      // Function to close the video modal
-      function closeVideoModal() {
-        demoModal.style.display = 'none';
-        demoVideo.pause();
-        demoVideo.querySelector('source').src = '';
-        demoVideo.load();
-        document.body.style.overflow = 'auto';
-        currentExercise = null;
-      }
-      
-      // Routine checker form
-      const routineForm = document.getElementById('routineForm');
-      const routineResult = document.getElementById('routineResult');
-      const recommendationsList = document.getElementById('recommendationsList');
-      
-      if (routineForm) {
-        routineForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          // Get form values
-          const goal = document.getElementById('routineGoal').value;
-          const locationRadios = document.getElementsByName('location');
-          const experienceRadios = document.getElementsByName('experience');
-          const genderRadios = document.getElementsByName('gender');
-          
-          let location = '';
-          for (const radio of locationRadios) {
-            if (radio.checked) {
-              location = radio.value;
-              break;
-            }
-          }
-          
-          let experience = '';
-          for (const radio of experienceRadios) {
-            if (radio.checked) {
-              experience = radio.value;
-              break;
-            }
-          }
-          
-          let gender = '';
-          for (const radio of genderRadios) {
-            if (radio.checked) {
-              gender = radio.value;
-              break;
-            }
-          }
-          
-          // Check if all values are filled
-          if (!goal || !location || !experience || !gender) {
-            alert('Please fill out all fields');
-            return;
-          }
-          
-          // Show loading state
-          const submitButton = routineForm.querySelector('button[type="submit"]');
-          const originalButtonText = submitButton.innerHTML;
-          submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-          submitButton.disabled = true;
-          
-          // Simulate AI generating a routine
-          setTimeout(() => {
-            // Reset button
-            submitButton.innerHTML = originalButtonText;
-            submitButton.disabled = false;
-            
-            // Get recommendations from local data or generate generic ones
-            let recommendations = [];
-            
-            try {
-              if (routinesData[goal] && 
-                  (routinesData[goal][location] || routinesData[goal]['both']) && 
-                  (routinesData[goal][location]?.[experience] || routinesData[goal]['both']?.[experience])) {
-                
-                recommendations = routinesData[goal][location]?.[experience] || 
-                                  routinesData[goal]['both']?.[experience] || [];
-              }
-            } catch (error) {
-              console.error('Error finding routine:', error);
-            }
-            
-            if (recommendations.length === 0) {
-              // Generate AI-like recommendations based on filters
-              const exercisePool = exercisesDatabase.filter(ex => 
-                (ex.category === location || location === 'both') && 
-                (ex.genderFocus === gender || ex.genderFocus === 'both')
-              );
-              
-              // Generate different recommendations based on goal and experience
-              if (goal === 'belly') {
-                recommendations.push("Core Exercises - 3 sets, 3 times per week");
-                recommendations.push("HIIT Cardio - 20 minutes, 4 times per week");
-                recommendations.push("Maintain a 500 calorie deficit daily");
-              } else if (goal === 'muscle') {
-                recommendations.push("Progressive Overload Weight Training - 4 days per week");
-                recommendations.push("Protein intake of 1.6-2g per kg of bodyweight");
-                recommendations.push("Focus on compound movements with heavy weights");
-              } else if (goal === 'strength') {
-                recommendations.push("5x5 Strength Program - 3 days per week");
-                recommendations.push("Focus on the big four: Squat, Bench, Deadlift, Overhead Press");
-                recommendations.push("Rest 2-3 minutes between sets for optimal strength gains");
-              } else if (goal === 'cardio') {
-                recommendations.push("Zone 2 Cardio - 30 minutes, 3-5 days per week");
-                recommendations.push("HIIT Training - 1-2 days per week");
-                recommendations.push("Cross-training with varied cardio modalities");
-              }
-              
-              // Add 2 specific exercises from our database that match criteria
-              if (exercisePool.length > 0) {
-                for (let i = 0; i < Math.min(2, exercisePool.length); i++) {
-                  const randomIndex = Math.floor(Math.random() * exercisePool.length);
-                  const exercise = exercisePool[randomIndex];
-                  
-                  let repRange = '';
-                  if (goal === 'strength') repRange = '5 sets of 5 reps';
-                  else if (goal === 'muscle') repRange = '4 sets of 8-12 reps';
-                  else if (goal === 'cardio') repRange = '3 sets of 15-20 reps';
-                  else repRange = '3 sets of 10-15 reps';
-                  
-                  recommendations.push(`${exercise.name} - ${repRange}`);
-                  
-                  // Remove to avoid duplicates
-                  exercisePool.splice(randomIndex, 1);
-                }
-              }
-            }
-            
-            if (recommendations.length === 0) {
-              alert('Could not generate a routine. Please try different options.');
-              return;
-            }
-            
-            // Display recommendations
-            recommendationsList.innerHTML = '';
-            recommendations.forEach(recommendation => {
-              const li = document.createElement('li');
-              li.textContent = recommendation;
-              recommendationsList.appendChild(li);
-            });
-            
-            routineResult.classList.remove('hidden');
-          }, 2000); // Simulate AI processing time
         });
       }
       
-      // Initialize Progress Chart
-      const progressChartCanvas = document.getElementById('progressChart');
-      if (progressChartCanvas) {
-        const timeRangeSelect = document.getElementById('timeRangeSelect');
+      function closeModal() {
+        authModal.classList.remove('active');
+        document.body.style.overflow = '';
         
-        // Sample data for different time ranges
-        const chartData = {
-          week: {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            workouts: [1, 0, 1, 1, 0, 1, 0],
-            weight: [75.2, 75.2, 75.0, 74.8, 74.8, 74.5, 74.5]
-          },
-          month: {
-            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-            workouts: [3, 4, 3, 4],
-            weight: [76.5, 75.8, 75.2, 74.5]
-          },
-          '3months': {
-            labels: ['Jan', 'Feb', 'Mar'],
-            workouts: [12, 15, 16],
-            weight: [78.0, 76.0, 74.5]
-          },
-          year: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            workouts: [8, 10, 12, 15, 16, 14, 12, 13, 15, 16, 18, 20],
-            weight: [80, 79, 78, 77, 76.5, 76, 75.5, 75, 74.5, 74, 73.5, 73]
-          }
-        };
-        
-        let progressChart = new Chart(progressChartCanvas, {
-          type: 'line',
-          data: {
-            labels: chartData.month.labels,
-            datasets: [
-              {
-                label: 'Workouts',
-                data: chartData.month.workouts,
-                backgroundColor: 'rgba(61, 90, 241, 0.2)',
-                borderColor: 'rgba(61, 90, 241, 1)',
-                borderWidth: 2,
-                tension: 0.3,
-                yAxisID: 'y'
-              },
-              {
-                label: 'Weight (kg)',
-                data: chartData.month.weight,
-                backgroundColor: 'rgba(34, 209, 238, 0.2)',
-                borderColor: 'rgba(34, 209, 238, 1)',
-                borderWidth: 2,
-                tension: 0.3,
-                yAxisID: 'y1'
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            scales: {
-              y: {
-                type: 'linear',
-                display: true,
-                position: 'left',
-                title: {
-                  display: true,
-                  text: 'Workouts'
-                }
-              },
-              y1: {
-                type: 'linear',
-                display: true,
-                position: 'right',
-                grid: {
-                  drawOnChartArea: false
-                },
-                title: {
-                  display: true,
-                  text: 'Weight (kg)'
-                }
-              }
-            }
-          }
-        });
-        
-        // Update chart when time range changes
-        timeRangeSelect.addEventListener('change', function() {
-          const timeRange = this.value;
-          progressChart.data.labels = chartData[timeRange].labels;
-          progressChart.data.datasets[0].data = chartData[timeRange].workouts;
-          progressChart.data.datasets[1].data = chartData[timeRange].weight;
-          progressChart.update();
-        });
-        
-        // Log workout form
-        const logWorkoutForm = document.getElementById('logWorkoutForm');
-        if (logWorkoutForm) {
-          logWorkoutForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values - in a real app these would be saved to a database
-            const date = document.getElementById('workoutDate').value;
-            const type = document.getElementById('workoutType').value;
-            const duration = document.getElementById('workoutDuration').value;
-            const intensity = document.getElementById('workoutIntensity').value;
-            const weight = document.getElementById('currentWeight').value;
-            const notes = document.getElementById('workoutNotes').value;
-            
-            // Show success message
-            alert('Workout logged successfully!');
-            
-            // Reset form
-            logWorkoutForm.reset();
-            
-            // In a real application, update the chart with the new data
-            // Here we'll just simulate a small update
-            const todayIndex = chartData.week.labels.indexOf('Sun');
-            if (todayIndex !== -1) {
-              chartData.week.workouts[todayIndex] += 1;
-              if (weight) {
-                chartData.week.weight[todayIndex] = parseFloat(weight);
-              }
-              
-              // Update chart if weekly view is active
-              if (timeRangeSelect.value === 'week') {
-                progressChart.update();
-              }
-            }
-          });
+        // Hide success message
+        if (!successMessage.classList.contains('hidden')) {
+          successMessage.classList.add('hidden');
+          document.getElementById('login-content').classList.add('active');
         }
       }
       
-      // FAQ functionality
-      const faqItems = document.querySelectorAll('.faq-item');
-      
-      faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
+      function showSuccessMessage(title, message) {
+        // Hide form contents
+        modalContents.forEach(content => content.classList.remove('active'));
         
-        question.addEventListener('click', () => {
-          // Toggle active class
-          item.classList.toggle('active');
-          
-          // Update icon
-          const icon = question.querySelector('i');
-          if (item.classList.contains('active')) {
-            icon.classList.remove('fa-chevron-down');
-            icon.classList.add('fa-chevron-up');
-          } else {
-            icon.classList.remove('fa-chevron-up');
-            icon.classList.add('fa-chevron-down');
-          }
-        });
-      });
-      
-      // AI Chat functionality
-      const chatForm = document.getElementById('chatForm');
-      const chatInput = document.getElementById('chatInput');
-      const chatMessages = document.getElementById('chatMessages');
-      
-      // Sample responses for common fitness questions
-      const aiResponses = {
-        "workout": "For optimal results, aim to work out 3-5 times per week with a mix of cardio and strength training. Beginners should start with 3 sessions and gradually increase frequency as fitness improves. Always include at least 1-2 rest days.",
-        "weight": "Weight loss is 80% nutrition and 20% exercise. Create a sustainable calorie deficit (500 calories/day for ~1lb/week loss), focus on protein intake, and combine cardio with strength training to preserve muscle mass.",
-        "muscle": "To build muscle, focus on progressive overload (gradually increasing weight), consume adequate protein (1.6-2g per kg of bodyweight), get enough quality sleep (7-9 hours), and ensure you're in a slight calorie surplus.",
-        "nutrition": "A balanced diet should include lean proteins, complex carbohydrates, healthy fats, and plenty of fruits and vegetables. Meal timing isn't as important as overall daily intake, but eating protein after workouts can aid recovery.",
-        "beginner": "As a beginner, focus on learning proper form, start with bodyweight exercises, build consistency before intensity, and follow a structured program. The key is to start slow and gradually progress.",
-        "injury": "For injury recovery, consult a healthcare professional first. Follow RICE (Rest, Ice, Compression, Elevation) for acute injuries, gradually reintroduce movement as pain allows, and strengthen supporting muscles during recovery.",
-        "motivation": "To stay motivated, set specific and achievable goals, find a workout style you enjoy, track your progress, reward yourself for consistency, and consider finding a workout partner or community for accountability."
-      };
-      
-      if (chatForm) {
-        chatForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const message = chatInput.value.trim();
-          if (!message) return;
-          
-          // Add user message
-          addChatMessage(message, 'user');
-          
-          // Clear input
-          chatInput.value = '';
-          
-          // Show typing indicator
-          const typingIndicator = document.createElement('div');
-          typingIndicator.className = 'chat-message assistant';
-          typingIndicator.innerHTML = '<p><i class="fas fa-spinner fa-pulse"></i> AI is typing...</p>';
-          chatMessages.appendChild(typingIndicator);
-          
-          // Scroll to bottom
-          chatMessages.scrollTop = chatMessages.scrollHeight;
-          
-          // Simulate AI response (would connect to Anthropic API in real version)
-          setTimeout(() => {
-            // Remove typing indicator
-            chatMessages.removeChild(typingIndicator);
-            
-            // Generate response based on keywords in the message
-            let response = "I'm your AI fitness assistant. How can I help you reach your fitness goals today?";
-            
-            const lowerMessage = message.toLowerCase();
-            for (const [keyword, reply] of Object.entries(aiResponses)) {
-              if (lowerMessage.includes(keyword)) {
-                response = reply;
-                break;
-              }
-            }
-            
-            // Add AI response
-            addChatMessage(response, 'assistant');
-            
-            // Scroll to bottom
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-          }, 1500);
-        });
+        // Update success message
+        document.querySelector('.success-title').textContent = title;
+        document.querySelector('.success-message').textContent = message;
         
-        // Function to add a message to the chat
-        function addChatMessage(message, sender) {
-          const messageElement = document.createElement('div');
-          messageElement.className = `chat-message ${sender}`;
-          messageElement.innerHTML = `<p>${message}</p>`;
-          chatMessages.appendChild(messageElement);
-        }
-      }
-      
-      // Signup form
-      const signupForm = document.getElementById('signupForm');
-      
-      if (signupForm) {
-        signupForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          // Get form values
-          const fullName = document.getElementById('fullName').value;
-          const username = document.getElementById('username').value;
-          const email = document.getElementById('email').value;
-          const password = document.getElementById('password').value;
-          const fitnessGoal = document.getElementById('fitnessGoal').value;
-          const terms = document.getElementById('terms').checked;
-          
-          // Simple validation
-          if (!fullName || !username || !email || !password || !fitnessGoal) {
-            alert('Please fill out all fields');
-            return;
-          }
-          
-          if (!terms) {
-            alert('Please accept the terms and conditions');
-            return;
-          }
-          
-          // Password validation
-          if (password.length < 8) {
-            alert('Password must be at least 8 characters');
-            return;
-          }
-          
-          if (!/\d/.test(password)) {
-            alert('Password must contain at least 1 number');
-            return;
-          }
-          
-          if (!/[^a-zA-Z0-9]/.test(password)) {
-            alert('Password must contain at least 1 special character');
-            return;
-          }
-          
-          // Email validation
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address');
-            return;
-          }
-          
-          // Show loading state
-          const submitButton = signupForm.querySelector('button[type="submit"]');
-          const originalButtonText = submitButton.innerHTML;
-          submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
-          submitButton.disabled = true;
-          
-          // Simulate server processing
-          setTimeout(() => {
-            // Success message
-            alert(`Account created! Welcome to FitFlow Gym, ${fullName}. We've created a personalized dashboard based on your ${fitnessGoal} goal.`);
-            
-            // Reset form
-            signupForm.reset();
-            
-            // Reset button
-            submitButton.innerHTML = originalButtonText;
-            submitButton.disabled = false;
-          }, 2000);
-        });
+        // Show success message
+        successMessage.classList.remove('hidden');
       }
       
       // Smooth scrolling for navigation links
-      const navLinks = document.querySelectorAll('header nav a');
-      
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          if (this.getAttribute('href') === '#') return;
+          
           e.preventDefault();
           
-          const targetId = this.getAttribute('href').substring(1);
-          const targetElement = document.getElementById(targetId);
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+      
+      // Save exercise button
+      document.querySelectorAll('.save-exercise').forEach(button => {
+        button.addEventListener('click', function() {
+          const icon = this.querySelector('i');
           
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 70,
-              behavior: 'smooth'
-            });
+          if (icon.classList.contains('far')) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            this.style.color = '#3d5af1';
+          } else {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+            this.style.color = '';
           }
         });
+      });
+      
+      // Load more exercises
+      document.getElementById('loadMoreExercises').addEventListener('click', function() {
+        // In a real app, this would load more exercises from the server
+        alert('In a real application, this would load more exercises from the server.');
       });
     });
   </script>

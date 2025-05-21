@@ -2409,12 +2409,28 @@
         });
       });
       
-      // Load more exercises
-      document.getElementById('loadMoreExercises').addEventListener('click', function() {
-        // In a real app, this would load more exercises from the server
-        alert('In a real application, this would load more exercises from the server.');
-      });
+        // Load more exercises
+  document.getElementById('loadMoreExercises').addEventListener('click', function() {
+    // In a real app, this would load more exercises from the server
+    alert('In a real application, this would load more exercises from the server.');
+  });
+});
+</script>
+
+<!-- ✅ Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function (registration) {
+          console.log('✅ ServiceWorker registered with scope:', registration.scope);
+        })
+        .catch(function (error) {
+          console.log('❌ ServiceWorker registration failed:', error);
+        });
     });
-  </script>
+  }
+</script>
+
 </body>
 </html>
